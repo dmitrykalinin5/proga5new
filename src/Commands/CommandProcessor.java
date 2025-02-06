@@ -6,8 +6,15 @@ import java.util.Map;
 public class CommandProcessor {
     private Map<String, Command> commands;
 
-    public CommandProcessor() {
+    public void CommandPut(String name) {
+        // Словарь
         commands = new HashMap<>();
-        commands.put("help", new Help_Command());
+
+        // Список комманд
+        commands.put("help", new HelpCommand());
+
+
+        // Выполняем команду, которую ввел пользователь
+        commands.get(name).execute();
     }
 }
