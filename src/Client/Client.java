@@ -9,7 +9,7 @@ public class Client {
         String command = scanner.nextLine();
         CommandProcessor commandProcessor = new CommandProcessor();
 
-        /* Обращаемся к commandprocessor берем метод put, передаем ему команду
+        /* Обращаемся к commandprocessor, берем метод put, передаем ему команду,
         которую ввел пользователь */
         commandProcessor.CommandPut(command);
     }
