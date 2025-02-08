@@ -31,7 +31,7 @@ public class Ticket {
                 + creationDate + "\"Цена\":" + price + "\"Тип билета\":" + type + "\"ФИО\":" + person + "}";
     }
 
-    public boolean validate() {
-        if (id <= )
-    }
+//    public boolean validate() {
+//        if (id <= )
+//    }
 }
