@@ -1,10 +1,9 @@
-import Client.Client;
-import Console.run;
+import Server.Console.Session;
 
 public class Main {
     public static void main(String[] args) {
-        Client client = new Client();
-        // сделать session.run
-        client.userInput();
+        Session session = new Session();
+
+        session.run();
     }
 }

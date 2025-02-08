@@ -1,6 +1,6 @@
 package Client;
 import java.util.Scanner;
-import Commands.CommandProcessor;
+import Server.Commands.CommandProcessor;
 
 public class Client {
 
