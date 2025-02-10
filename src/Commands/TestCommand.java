@@ -34,7 +34,7 @@ public class TestCommand implements Command {
 
     @Override
     public String toString() {
-        return  "Ticket{\"id\" : " + id + ", \"name\" : \"" + name.getName() + "\", \"coordinates\" : (" +
+        return  "Ticketyoooo{\"id\" : " + id + ", \"name\" : \"" + name.getName() + "\", \"coordinates\" : (" +
                 coordinates + ", " + coordinates + "), \"Дата покупки\" : "
                 + "creationDateValidation" + ", \"Цена\":" + price.getPrice() + "" +
                 ", \"Тип билета\" : " + type + ", \"ФИО\":" + person + "}";
