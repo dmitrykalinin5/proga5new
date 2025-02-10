@@ -1,5 +1,4 @@
 package Console;
-import Client;
 
 public class Session {
 

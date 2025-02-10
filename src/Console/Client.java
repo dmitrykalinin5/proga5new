@@ -1,3 +1,5 @@
+package Console;
+
 import java.util.Scanner;
 import Commands.CommandProcessor;
 

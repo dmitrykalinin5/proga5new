@@ -9,6 +9,8 @@ public class NameValidation implements Validation {
         this.name = name;
     }
 
+    public String getName() { return name; }
+
     @Override
     public boolean validate() { return name != null; }
 

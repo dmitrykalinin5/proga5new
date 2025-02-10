@@ -2,9 +2,9 @@ package Collections;
 
 public class Coordinates {
     private final int x;
-    private final int y;
+    private final double y;
 
-    public Coordinates(int x, int y) {
+    public Coordinates(int x, double y) {
         this.x = x;
         this.y = y;
     }
@@ -13,7 +13,7 @@ public class Coordinates {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 

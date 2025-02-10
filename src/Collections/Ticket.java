@@ -8,7 +8,8 @@ public class Ticket implements Validation {
     private final Coordinates coordinates; //Поле не может быть null
     private final CoordinatesValidation coordinatesValidation;
     private final java.time.LocalDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
-    private final Long price; //Поле может быть null, Значение поля должно быть больше 0
+    private final CreationDateValidation creationDateValidation;
+    private final PriceValidation price; //Поле может быть null, Значение поля должно быть больше 0
     private final TicketType type; //Поле не может быть null
     private final Person person; //Поле может быть null
 
@@ -18,8 +19,8 @@ public class Ticket implements Validation {
         this.coordinates = coordinates;
         this.coordinatesValidation = new CoordinatesValidation(coordinates, coordinates.getX(), coordinates.getY());
         this.creationDate = creationDate;
-        // this.creationDate
-        this.price = price;
+        this.creationDateValidation = new CreationDateValidation(creationDate);
+        this.price = new PriceValidation(price);
         this.type = type;
         this.person = person;
     }
@@ -27,7 +28,11 @@ public class Ticket implements Validation {
     // Проверка на валидность
     @Override
     public boolean validate() {
-        return id.validate() && name.validate();
+        return id.validate() &&
+                name.validate() &&
+                coordinatesValidation.validate() &&
+                creationDateValidation.validate() &&
+                price.validate();
 
     }
     // Меняем сообщение
@@ -35,21 +40,19 @@ public class Ticket implements Validation {
     public String getErrorMessage() {
         if (!id.validate()) {return id.getErrorMessage();}
         if (!name.validate()) {return name.getErrorMessage();}
-//        if (!id.validate()) {return id.getErrorMessage();}
-//        if (!id.validate()) {return id.getErrorMessage();}
-//        if (!id.validate()) {return id.getErrorMessage();}
+        if (!coordinatesValidation.validate()) {return coordinatesValidation.getErrorMessage();}
+        if (!creationDateValidation.validate()) {return creationDateValidation.getErrorMessage();}
+        if (!price.validate()) {return price.getErrorMessage();}
         return "Все окей (geterrormsg)";
-    }
-
-    public int getId() {
-        return id.getId();
     }
 
     @Override
     public String toString() {
         // Написал названия для полей, но думаю потом поменяю
-        return  "Ticket{\"id\":" + id + ",\"name\":\"" + name + "\",\"coordinates\":" + coordinates + "\"Дата покупки\":"
-                + creationDate + "\"Цена\":" + price + "\"Тип билета\":" + type + "\"ФИО\":" + person + "}";
+        return  "Ticket{\"id\" : " + id.getId() + ", \"name\" : \"" + name.getName() + "\", \"coordinates\" : (" +
+                coordinates.getX() + ", " + coordinates.getY() + "), \"Дата покупки\" : "
+                + creationDateValidation.getCreationDate() + ", \"Цена\":" + price.getPrice() + "" +
+                ", \"Тип билета\" : " + type + ", \"ФИО\":" + person + "}";
     }
 
 //    public boolean validate() {
