@@ -1,5 +1,5 @@
-package Server.Console;
-import Client.Client;
+package Console;
+import Client;
 
 public class Session {
 

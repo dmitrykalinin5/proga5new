@@ -1,4 +1,4 @@
-package Server.Collections;
+package Collections;
 
 public enum TicketType {
     VIP,

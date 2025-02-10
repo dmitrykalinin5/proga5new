@@ -1,4 +1,4 @@
-package Server.Commands;
+package Commands;
 
 public interface Command {
     void execute();

@@ -1,4 +1,4 @@
-import Server.Console.Session;
+import Console.Session;
 
 public class Main {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package Server.Validaters;
+package Validaters;
 
 import Tools.Validation;
 

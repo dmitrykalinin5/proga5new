@@ -1,4 +1,4 @@
-package Server.Commands;
+package Commands;
 
 public class HelpCommand implements Command {
 //    Help_Command() {
