@@ -1,7 +1,7 @@
 package Commands;
 
 public class AddCommand implements Command {
-    String element;
+    private final String element;
 
     // Делаем из parts[1] element
     public AddCommand(String element) {
