@@ -12,4 +12,7 @@ public class AddCommand implements Command {
     public void execute() {
         System.out.println("Добавить элемент " + element);
     }
+
+    @Override
+    public String description() { return "Exits session"; };
 }

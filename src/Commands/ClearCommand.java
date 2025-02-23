@@ -5,4 +5,7 @@ public class ClearCommand implements Command {
     public void execute() {
         System.out.println("Очистка");
     }
+
+    @Override
+    public String description() { return "Clears collection"; }
 }

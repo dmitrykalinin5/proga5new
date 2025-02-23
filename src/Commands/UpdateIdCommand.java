@@ -1,12 +1,13 @@
 package Commands;
 
 public class UpdateIdCommand implements Command {
-    private final int id;
+    private String id;
+    // Потом переделай string в int
 
-    public UpdateIdCommand(String id) { this.id = Integer.parseInt(id); }
+    public UpdateIdCommand(String id) { this.id = id;}
 
     @Override
     public void execute() {
-        System.out.println("Обновляем значение id: " + id);
+        System.out.println("Апдейдим айди " + id);
     }
 }

@@ -10,4 +10,6 @@ public class RemoveByIdCommand implements Command{
         System.out.println("Убираем элемент с айди: " + id);
     }
 
+    @Override
+    public String description() { return "Removes an element by its id"; }
 }

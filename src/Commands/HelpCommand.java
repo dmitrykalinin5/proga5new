@@ -9,4 +9,7 @@ public class HelpCommand implements Command {
     public void execute() {
         System.out.println("Лови хелпу убежище");
     }
+
+    @Override
+    public String description() { return "Displays help information about commands"; }
 }

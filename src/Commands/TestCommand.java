@@ -39,4 +39,7 @@ public class TestCommand implements Command {
                 + "creationDateValidation" + ", \"Цена\":" + price.getPrice() + "" +
                 ", \"Тип билета\" : " + type + ", \"ФИО\":" + person + "}";
     }
+
+    @Override
+    public String description() { return null; }
 }

@@ -5,4 +5,7 @@ public class ShowCommand implements Command {
     public void execute() {
         System.out.println("Все элементы коллекции");
     }
+
+    @Override
+    public String description() { return "Displays all elements from collection"; }
 }

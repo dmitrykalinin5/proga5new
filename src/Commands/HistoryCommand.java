@@ -5,4 +5,7 @@ public class HistoryCommand implements Command {
     public void execute() {
         System.out.println("Вывод истории команд");
     }
+
+    @Override
+    public String description() { return "Displays the last 13 entered commands"; }
 }

@@ -9,4 +9,7 @@ public class ExecuteScriptCommand implements Command {
     public void execute() {
         System.out.println("Запуск скрипта " + file_name + "...");
     }
+
+    @Override
+    public String description() { return "Executes script"; }
 }

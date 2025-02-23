@@ -5,4 +5,7 @@ public class InfoCommand implements Command {
     public void execute() {
         System.out.println("Справка по коллекции");
     }
+
+    @Override
+    public String description() { return "Displays information about the collection"; }
 }
