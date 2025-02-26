@@ -6,4 +6,8 @@ public class Person {
     private int weight; //Значение поля должно быть больше 0
     private Location location; //Поле может быть null
 
+    public Person(java.time.ZonedDateTime birthday, Long height, int weight, Location location) {
+
+    }
+
 }
