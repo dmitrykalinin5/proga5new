@@ -7,6 +7,7 @@ public class Client {
 
     public void userInput() {
         Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter command: ");
         String command = scanner.nextLine();
         CommandProcessor commandProcessor = new CommandProcessor();
 
