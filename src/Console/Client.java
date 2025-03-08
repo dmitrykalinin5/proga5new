@@ -13,6 +13,6 @@ public class Client {
 
         /* Обращаемся к commandprocessor, берем метод put, передаем ему команду,
         которую ввел пользователь */
-        commandProcessor.CommandPut(command);
+        commandProcessor.executeCommand(command);
     }
 }

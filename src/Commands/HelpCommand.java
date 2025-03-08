@@ -6,7 +6,7 @@ public class HelpCommand implements Command {
 //    }
 
     @Override
-    public void execute() {
+    public void execute(String[] args) {
         System.out.printf("Справка по возможным командам:\n" +
                 "1. help - справка.\n" +
                 "2. info - получить информацию о коллекции.\n" +

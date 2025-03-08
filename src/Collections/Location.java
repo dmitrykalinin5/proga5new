@@ -5,4 +5,9 @@ public class Location {
     private double y;
     private Float z; //Поле не может быть null
 
+    public Location(long x, double y, Float z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
 }

@@ -52,7 +52,7 @@ public class Ticket implements Validation {
         return  "Ticket{\"id\" : " + id.getId() + ", \"name\" : \"" + name.getName() + "\", \"coordinates\" : (" +
                 coordinates.getX() + ", " + coordinates.getY() + "), \"Дата покупки\" : "
                 + creationDateValidation.getCreationDate() + ", \"Цена\":" + price.getPrice() + "" +
-                ", \"Тип билета\" : " + type + ", \"ФИО\":" + person + "}";
+                ", \"Тип билета\" : " + type + ", \"Персона:\":" + person + "}";
     }
 
 //    public boolean validate() {

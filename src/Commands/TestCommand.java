@@ -1,8 +1,6 @@
 package Commands;
 
 import Collections.Coordinates;
-import Collections.Person;
-import Collections.Ticket;
 import Collections.TicketType;
 import Validaters.*;
 
@@ -29,7 +27,7 @@ public class TestCommand implements Command {
         this.person = person;
     }
     @Override
-    public void execute() {
+    public void execute(String[] args) {
         System.out.println(toString()); }
 
     @Override

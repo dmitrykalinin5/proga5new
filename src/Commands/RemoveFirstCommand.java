@@ -2,7 +2,7 @@ package Commands;
 
 public class RemoveFirstCommand implements Command {
     @Override
-    public void execute() {
+    public void execute(String[] args) {
         System.out.println("Remove first command");
     }
 
