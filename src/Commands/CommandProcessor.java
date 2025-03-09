@@ -31,7 +31,7 @@ public class CommandProcessor {
     public void executeCommand(String input) {
         String[] parts = input.split(" ");
         String commandName = parts[0];
-        if (parts.length == 3) {  }
         Command command = commands.get(commandName);
+        command.execute(parts);
     }
 }

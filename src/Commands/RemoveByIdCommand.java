@@ -1,13 +1,13 @@
 package Commands;
 
 public class RemoveByIdCommand implements Command{
-    private final int id;
+    //private final int id;
 
-    public RemoveByIdCommand() { this.id = Integer.parseInt(id); }
+    public RemoveByIdCommand() {  }
 
     @Override
     public void execute(String[] args) {
-        System.out.println("Убираем элемент с айди: " + id);
+        //System.out.println("Убираем элемент с айди: " + id);
     }
 
     @Override

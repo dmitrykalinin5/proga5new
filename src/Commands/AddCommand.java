@@ -19,8 +19,7 @@ public class AddCommand implements Command {
 
     @Override
     public void execute(String[] args) {
-        String[] elements = element.split(",");
-        System.out.println(Arrays.toString(elements));
+        String[] elements = args[1].split(",");
         Coordinates coordinates = new Coordinates(Integer.parseInt(elements[2].split(";")[0]), Double.parseDouble(elements[2].split(";")[1]));
         Location location = new Location(Long.parseLong(elements[8].split(";")[0]), Double.parseDouble(elements[8].split(";")[1]), Float.parseFloat(elements[8].split(";")[2]));
         Person person = new Person(java.time.ZonedDateTime.now(/*elements[5]*/),
