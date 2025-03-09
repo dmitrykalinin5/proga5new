@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tickets>
+    <ticket>
+        <id>1</id>
+        <name>dima</name>
+        <coordinates>123,228.0</coordinates>
+        <date>2025-03-09T22:37:45.043583500</date>
+        <price>1000</price>
+        <type>USUAL</type>
+        <birthday>2025-03-09T22:37:45.042585200+03:00[Europe/Moscow]</birthday>
+        <height>178</height>
+        <weight>65</weight>
+        <location>1,2.0,3.0</location>
+    </ticket>
+    <ticket>
+        <id>2</id>
+        <name>dima</name>
+        <coordinates>123,228.0</coordinates>
+        <date>2025-03-09T22:37:46.755442800</date>
+        <price>1000</price>
+        <type>USUAL</type>
+        <birthday>2025-03-09T22:37:46.755442800+03:00[Europe/Moscow]</birthday>
+        <height>178</height>
+        <weight>65</weight>
+        <location>1,2.0,3.0</location>
+    </ticket>
+    <ticket>
+        <id>3</id>
+        <name>dima</name>
+        <coordinates>123,228.0</coordinates>
+        <date>2025-03-09T22:38:12.988360200</date>
+        <price>1000</price>
+        <type>VIP</type>
+        <birthday>2025-03-09T22:38:12.988360200+03:00[Europe/Moscow]</birthday>
+        <height>178</height>
+        <weight>65</weight>
+        <location>1,2.0,3.0</location>
+    </ticket>
+</Tickets>
