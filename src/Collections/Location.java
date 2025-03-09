@@ -10,4 +10,13 @@ public class Location {
         this.y = y;
         this.z = z;
     }
+
+//    public long getX() { return x; }
+//    public double getY() { return y; }
+//    public Float getZ() { return z; }
+
+    @Override
+    public String toString() {
+        return x + "," + y + "," + z;
+    }
 }
