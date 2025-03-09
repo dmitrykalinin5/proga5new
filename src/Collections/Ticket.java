@@ -2,7 +2,9 @@ package Collections;
 import Validaters.*;
 import Tools.Validation;
 
-public class Ticket implements Validation {
+import java.time.ZonedDateTime;
+
+public class Ticket implements Validation, Comparable<Ticket> {
     private final IdValidation id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private final NameValidation name; //Поле не может быть null, Строка не может быть пустой
     private final Coordinates coordinates; //Поле не может быть null
@@ -24,6 +26,34 @@ public class Ticket implements Validation {
         this.type = type;
         this.person = person;
     }
+
+    // геттеры
+    public Integer getId() { return id.getId(); }
+
+    public String getName() { return name.getName(); }
+
+    public Coordinates getCoordinates() { return coordinates; }
+
+    public java.time.LocalDateTime getCreationDate() { return creationDate; }
+
+    public CoordinatesValidation getCoordinatesValidation() { return coordinatesValidation; }
+
+    public Long getPrice() { return price.getPrice(); }
+
+    public TicketType getType() { return type; }
+
+    public ZonedDateTime getBirthday() { return person.getBirthday(); }
+
+    public Long getHeight() { return person.getHeight(); }
+
+    public int getWeight() { return person.getWeight(); }
+
+    public Location getLocation() { return person.getLocation(); }
+
+    @Override
+    public int compareTo(Ticket other) {
+        return Integer.compare(this.id.getId(), other.id.getId());
+    };
 
     // Проверка на валидность
     @Override
@@ -49,10 +79,11 @@ public class Ticket implements Validation {
     @Override
     public String toString() {
         // Написал названия для полей, но думаю потом поменяю
-        return  "Ticket{\"id\" : " + id.getId() + ", \"name\" : \"" + name.getName() + "\", \"coordinates\" : (" +
-                coordinates.getX() + ", " + coordinates.getY() + "), \"Дата покупки\" : "
-                + creationDateValidation.getCreationDate() + ", \"Цена\":" + price.getPrice() + "" +
-                ", \"Тип билета\" : " + type + ", \"Персона:\":" + person + "}";
+        return  "Ticket{\"id\" : " + id.getId() + ", \"name\" : \"" + name.getName() + "\", \"coordinates\" : " +
+                coordinates.toString() + ", \"Дата покупки\" : "
+                + creationDateValidation.getCreationDate() + ", \"Цена\" : " + price.getPrice() +
+                ", \"Тип билета\" : " + type + ", \"Дата рождения:\" : " + person.getBirthday() +
+                ", \"Рост\" : " + person.getHeight() + ", \"Вес\" : " + person.getWeight() + ", \"Локация\" : " + person.getLocation() + "}";
     }
 
 //    public boolean validate() {
