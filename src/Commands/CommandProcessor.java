@@ -1,18 +1,25 @@
 package Commands;
 
+import Collections.CollectionManager;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class CommandProcessor {
     private Map<String, Command> commands = new HashMap<>();
+    private final CollectionManager collectionManager;
+
+    public CommandProcessor(CollectionManager collectionManager) {
+        this.collectionManager = collectionManager;
+    }
 
     public void CommandPut() {
         // Список команд
         commands.put("help", new HelpCommand());
         commands.put("info", new InfoCommand());
-        commands.put("show", new ShowCommand());
+        commands.put("show", new ShowCommand(collectionManager));
         commands.put("clear", new ClearCommand());
-        commands.put("save", new SaveCommand());
+        commands.put("save", new SaveCommand(collectionManager));
         commands.put("remove_first", new RemoveFirstCommand());
         commands.put("remove_head", new RemoveHeadCommand());
         commands.put("history", new HistoryCommand());
@@ -21,7 +28,7 @@ public class CommandProcessor {
         commands.put("exit", new ExitCommand());
 
         // Команды с аргументами
-        commands.put("add", new AddCommand());
+        commands.put("add", new AddCommand(collectionManager));
         commands.put("update", new UpdateIdCommand());
         commands.put("remove_by_id", new RemoveByIdCommand());
         commands.put("execute_script", new ExecuteScriptCommand());
