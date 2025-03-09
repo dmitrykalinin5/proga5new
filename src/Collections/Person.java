@@ -30,4 +30,11 @@ public class Person {
         this.location = location;
     }
 
+    //геттеры
+    public ZonedDateTime getBirthday() { return birthday; }
+    public Long getHeight() { return height; }
+    public int getWeight() { return weight; }
+    public Location getLocation() { return location; }
+
+
 }
