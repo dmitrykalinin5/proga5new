@@ -1,9 +1,17 @@
 package Commands;
 
+import Collections.CollectionManager;
+
 public class ShowCommand implements Command {
+    private final CollectionManager collectionManager;
+
+    public ShowCommand(CollectionManager collectionManager) {
+        this.collectionManager = collectionManager;
+    }
+
     @Override
     public void execute(String[] args) {
-        System.out.println("Все элементы коллекции");
+        System.out.println(collectionManager.getAllElements());
     }
 
     @Override
