@@ -4,34 +4,46 @@
         <id>1</id>
         <name>dima</name>
         <coordinates>123,228.0</coordinates>
-        <date>2025-03-09T22:37:45.043583500</date>
+        <date>2025-03-10T14:18:03.713320200</date>
         <price>1000</price>
         <type>USUAL</type>
-        <birthday>2025-03-09T22:37:45.042585200+03:00[Europe/Moscow]</birthday>
-        <height>178</height>
-        <weight>65</weight>
-        <location>1,2.0,3.0</location>
-    </ticket>
-    <ticket>
-        <id>2</id>
-        <name>dima</name>
-        <coordinates>123,228.0</coordinates>
-        <date>2025-03-09T22:37:46.755442800</date>
-        <price>1000</price>
-        <type>USUAL</type>
-        <birthday>2025-03-09T22:37:46.755442800+03:00[Europe/Moscow]</birthday>
+        <birthday>2025-03-10T14:18:03.710736400+03:00[Europe/Moscow]</birthday>
         <height>178</height>
         <weight>65</weight>
         <location>1,2.0,3.0</location>
     </ticket>
     <ticket>
         <id>3</id>
+        <name>vova</name>
+        <coordinates>123,228.0</coordinates>
+        <date>2025-03-10T15:46:29.972033500</date>
+        <price>1000</price>
+        <type>USUAL</type>
+        <birthday>2025-03-10T15:46:29.972033500+03:00[Europe/Moscow]</birthday>
+        <height>178</height>
+        <weight>65</weight>
+        <location>1,2.0,3.0</location>
+    </ticket>
+    <ticket>
+        <id>4</id>
         <name>dima</name>
         <coordinates>123,228.0</coordinates>
-        <date>2025-03-09T22:38:12.988360200</date>
-        <price>1000</price>
-        <type>VIP</type>
-        <birthday>2025-03-09T22:38:12.988360200+03:00[Europe/Moscow]</birthday>
+        <date>2025-03-10T16:15:21.787091600</date>
+        <price>1500</price>
+        <type>USUAL</type>
+        <birthday>2025-03-10T16:15:21.787091600+03:00[Europe/Moscow]</birthday>
+        <height>178</height>
+        <weight>65</weight>
+        <location>1,2.0,3.0</location>
+    </ticket>
+    <ticket>
+        <id>5</id>
+        <name>dima</name>
+        <coordinates>123,228.0</coordinates>
+        <date>2025-03-10T16:15:29.833024100</date>
+        <price>2000</price>
+        <type>USUAL</type>
+        <birthday>2025-03-10T16:15:29.833024100+03:00[Europe/Moscow]</birthday>
         <height>178</height>
         <weight>65</weight>
         <location>1,2.0,3.0</location>
