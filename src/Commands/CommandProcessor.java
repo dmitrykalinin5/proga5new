@@ -16,29 +16,33 @@ public class CommandProcessor {
     public void CommandPut() {
         // Список команд
         commands.put("help", new HelpCommand());
-        commands.put("info", new InfoCommand());
+        commands.put("info", new InfoCommand(collectionManager));
         commands.put("show", new ShowCommand(collectionManager));
-        commands.put("clear", new ClearCommand());
+        commands.put("clear", new ClearCommand(collectionManager));
         commands.put("save", new SaveCommand(collectionManager));
         commands.put("remove_first", new RemoveFirstCommand());
         commands.put("remove_head", new RemoveHeadCommand());
         commands.put("history", new HistoryCommand());
-        commands.put("min_by_id", new MinByIdCommand());
-        commands.put("group_counting_by_person", new ClearCommand());
+        commands.put("min_by_id", new MinByIdCommand(collectionManager));
+        //commands.put("group_counting_by_person", new Command(collectionManager));
         commands.put("exit", new ExitCommand());
 
         // Команды с аргументами
         commands.put("add", new AddCommand(collectionManager));
         commands.put("update", new UpdateIdCommand());
-        commands.put("remove_by_id", new RemoveByIdCommand());
+        commands.put("remove_by_id", new RemoveByIdCommand(collectionManager));
         commands.put("execute_script", new ExecuteScriptCommand());
-        commands.put("remove_all_by_price", new RemoveAllByPriceCommand());
+        commands.put("remove_all_by_price", new RemoveAllByPriceCommand(collectionManager));
     }
 
     public void executeCommand(String input) {
         String[] parts = input.split(" ");
         String commandName = parts[0];
         Command command = commands.get(commandName);
-        command.execute(parts);
+        try {
+            command.execute(parts);
+        } catch (NullPointerException exeption) {
+            System.out.println("Такой команды не существует");
+        }
     }
 }
