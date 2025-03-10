@@ -43,11 +43,15 @@ public class CollectionManager {
      * @return queue
      */
     public String getAllElements() {
-        StringBuilder result = new StringBuilder();
-        for (Ticket ticket : this.queue) {
-            result.append(ticket).append("\n");
+        if (this.queue.isEmpty()) {
+            return "Коллекция пуста\n";
+        } else {
+            StringBuilder result = new StringBuilder();
+            for (Ticket ticket : this.queue) {
+                result.append(ticket).append("\n");
+            }
+            return result.toString();
         }
-        return result.toString();
     }
 
     /**
@@ -112,6 +116,33 @@ public class CollectionManager {
             }
         }
         return flag;
+    }
+
+    /**
+     * Метод, который удаляет первый объект
+     * @return true, если удален; false, если не получилось удалить
+     */
+    public boolean removeFirst() {
+        if (this.queue.isEmpty()) {
+            return false;
+        } else {
+            this.queue.remove(this.queue.peek());
+            return true;
+        }
+    }
+
+    /**
+     * Выводит первый элемент коллекции и удаляет его
+     * @return
+     */
+    public boolean removeHead() {
+        if (this.queue.isEmpty()) {
+            return false;
+        } else {
+            System.out.println(this.queue.peek());
+            this.queue.remove(this.queue.peek());
+            return true;
+        }
     }
 
     /**
