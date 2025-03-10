@@ -2,18 +2,20 @@ package Commands;
 
 import Collections.CollectionManager;
 
-public class ClearCommand implements Command {
+public class GroupCountingByPersonCommand implements Command {
     private CollectionManager collectionManager;
 
-    public ClearCommand(CollectionManager collectionManager) {
+    public GroupCountingByPersonCommand(CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
     }
 
     @Override
     public void execute(String[] args) {
-        collectionManager.clearAllElements();
+
     }
 
     @Override
-    public String description() { return "Clears collection"; }
+    public String description() {
+        return "Grouping by Person";
+    }
 }

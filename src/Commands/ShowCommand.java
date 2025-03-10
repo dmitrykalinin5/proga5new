@@ -11,7 +11,7 @@ public class ShowCommand implements Command {
 
     @Override
     public void execute(String[] args) {
-        System.out.println(collectionManager.getAllElements());
+        System.out.print(collectionManager.getAllElements());
     }
 
     @Override

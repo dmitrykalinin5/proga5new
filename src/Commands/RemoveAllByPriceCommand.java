@@ -1,13 +1,27 @@
 package Commands;
 
+import Collections.CollectionManager;
+
 public class RemoveAllByPriceCommand implements Command {
-//    private final int price;
-//
-//    public RemoveAllByPriceCommand() { this.price = Integer.parseInt(price); }
+    private CollectionManager collectionManager;
+
+    public RemoveAllByPriceCommand(CollectionManager collectionManager) {
+        this.collectionManager = collectionManager;
+    }
 
     @Override
     public void execute(String[] args) {
-        System.out.println("Удаления элементов с ценой: + price" );
+        try {
+            int price = Integer.parseInt(args[1]);
+            boolean result = collectionManager.removeAllByPrice(price);
+            if (result) {
+                System.out.println("Элементы успешно удалены");
+            } else {
+                System.out.println("Элементов с такой ценой нет");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Цена должна быть числом");
+        }
     }
 
     @Override

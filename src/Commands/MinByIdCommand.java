@@ -1,9 +1,18 @@
 package Commands;
 
+import Collections.CollectionManager;
+
 public class MinByIdCommand implements Command {
+    private CollectionManager collectionManager;
+
+    public MinByIdCommand(CollectionManager collectionManager) {
+        this.collectionManager = collectionManager;
+    }
+
     @Override
     public void execute(String[] args) {
-        System.out.println("Минимальный по айди");
+        String element = collectionManager.getByMinimumId().toString();
+        System.out.println("Элемент с минимальным айди:\n" + element);
     }
 
     @Override
