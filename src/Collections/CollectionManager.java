@@ -4,6 +4,7 @@ import Collections.Ticket;
 
 import java.sql.SQLOutput;
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.PriorityQueue;
 import java.io.*;
 import java.util.regex.*;
@@ -14,9 +15,12 @@ import java.util.regex.*;
 
 public class CollectionManager {
     private final PriorityQueue<Ticket> queue = new PriorityQueue<>();
+    private final LocalDateTime creationTime;
     private int lastId = 0;
 
-    public CollectionManager() {}
+    public CollectionManager() {
+        this.creationTime = LocalDateTime.now();
+    }
 
     /**
      * Метод, который добавляет ticket в коллекцию
@@ -38,7 +42,77 @@ public class CollectionManager {
      * Метод, который возвращает все элементы
      * @return queue
      */
-    public PriorityQueue<Ticket> getAllElements() { return queue; }
+    public String getAllElements() {
+        StringBuilder result = new StringBuilder();
+        for (Ticket ticket : this.queue) {
+            result.append(ticket).append("\n");
+        }
+        return result.toString();
+    }
+
+    /**
+     * Метод, который очищает всю коллекцию
+     */
+    public void clearAllElements() { queue.clear(); }
+
+    /**
+     * Метод, который возвращает информацию о коллекции
+     * @return info
+     */
+    public String collectionInfo() {
+        String info = "Информация о коллекции:\nДата создания: " + creationTime.toString()
+                + "\nКол-во элементов: " + collectionSize();
+        return info;
+    }
+
+    /**
+     * Метод, который удаляет элемент с заданным ID из коллекции
+     * @param id ID элемента, который нужно удалить
+     * @return true, если элемент удален; false, если элемент с данным айди не найден.
+     */
+    public boolean removeById(int id) {
+        for (Ticket ticket : this.queue) {
+            if (ticket.getId() == id) {
+                this.queue.remove(ticket);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Метод, который возвращает кол-во элементов коллекции
+     * @return queue.size()
+     */
+    public int collectionSize() {
+        return queue.size();
+    }
+
+    /**
+     * Метод, который возвращает объект класса по минимальному id
+     * @return queue.peek(), объект по минимальному айди
+     */
+    public Ticket getByMinimumId() {
+        return queue.peek();
+    }
+
+    /**
+     * Метод, который удаляет все элементы эквивалентные заданной цене
+     * @param price
+     * @return true, если элемент удален; false, если элемент не удален
+     */
+    public boolean removeAllByPrice(int price) {
+        boolean flag = false;
+        Iterator<Ticket> iterator = this.queue.iterator();
+        while (iterator.hasNext()) {
+            Ticket ticket = iterator.next();
+            if (ticket.getPrice() == price) {
+                iterator.remove();
+                flag = true;
+            }
+        }
+        return flag;
+    }
 
     /**
      * Метод, который сохраняет коллекцию в файл
