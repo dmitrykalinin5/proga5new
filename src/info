@@ -6,6 +6,7 @@ id, имя, координаты через ;, цена, тип (USUAL, VIP, CHE
 
 
 add dima,123;228,1000,USUAL,21.08.2006,178,65,1;2;3
+execute_script script.txt
 
 
 
