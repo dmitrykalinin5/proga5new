@@ -1,9 +1,22 @@
 package Commands;
 
+import Collections.CollectionManager;
+
 public class RemoveFirstCommand implements Command {
+    private CollectionManager collectionManager;
+
+    public RemoveFirstCommand(CollectionManager collectionManager) {
+        this.collectionManager = collectionManager;
+    }
+
     @Override
     public void execute(String[] args) {
-        System.out.println("Remove first command");
+        boolean result = collectionManager.removeFirst();
+        if (result) {
+            System.out.println("Элемент успешно удален");
+        } else {
+            System.out.println("Нечего удалять! Коллекция пуста");
+        }
     }
 
     @Override
