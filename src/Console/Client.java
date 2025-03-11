@@ -14,14 +14,17 @@ public class Client {
         this.historyDeque = historyDeque;
     }
 
-    public void userInput() {
+    public String userInput() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter command: ");
-        String command = scanner.nextLine();
+        String input = scanner.nextLine();
+        return input.trim();
+    }
+
+    public void executeCommand() {
+        String command = userInput();
         CommandProcessor commandProcessor = new CommandProcessor(collectionManager, historyDeque);
         commandProcessor.CommandPut();
-        /* Обращаемся к commandprocessor, берем метод put, передаем ему команду,
-        которую ввел пользователь */
         commandProcessor.executeCommand(command);
     }
 }

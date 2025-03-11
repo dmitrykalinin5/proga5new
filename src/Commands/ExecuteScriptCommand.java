@@ -7,6 +7,9 @@ import java.nio.file.Paths;
 import java.io.IOException;
 import java.util.Arrays;
 
+/**
+ * Класс, который читает файл построчно и выполняет команды, которые в нем находятся
+ */
 public class ExecuteScriptCommand implements Command {
     private CommandProcessor commandProcessor;
 
@@ -30,23 +33,15 @@ public class ExecuteScriptCommand implements Command {
     public void execute(String[] args) {
         String file_name = args[1];
         String[] fileInput = readFile(file_name);
-        System.out.println("чо в файле:" + Arrays.toString(fileInput));
+//        System.out.println("чо в файле:" + Arrays.toString(fileInput));
+//        System.out.println("отдельыый элемент " + fileInput[0]);
+//        System.out.println("длина файла " + fileInput.length);
         // Если файл не был найден или произошла ошибка при его чтении, завершаем выполнение метода
         if (fileInput == null) {
             return;  // Останавливаем выполнение метода
         }
-
-        /*
-
-        Нерабочий if снизу, пофиксить
-
-
-         */
-
-
-
-
-        if (fileInput.length == 0) {
+        // нерабочий If
+        if (fileInput[0] == null) {
             System.out.println("Файл пустой");
             return;
         }
@@ -54,14 +49,14 @@ public class ExecuteScriptCommand implements Command {
         for (String command : fileInput) {
             command = command.trim();
             System.out.println("Выполнение команды: " + command.split(" ")[0]);
-            System.out.println(command);
+            //System.out.println(command);
             commandProcessor.CommandPut();
             commandProcessor.executeCommand(command);
-        }
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         System.out.println("Скрипт выполнен");
     }

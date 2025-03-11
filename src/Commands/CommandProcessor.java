@@ -45,8 +45,8 @@ public class CommandProcessor {
         String[] parts = input.split(" ");
         String commandName = parts[0];
         Command command = commands.get(commandName);
-        System.out.println("Parts: " + Arrays.toString(parts));
-        System.out.println("Значение: " + commandName);
+//        System.out.println("Parts: " + Arrays.toString(parts));
+//        System.out.println("Значение: " + commandName);
         try {
             command.execute(parts);
             saveCommand(parts[0]);

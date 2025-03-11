@@ -15,6 +15,6 @@ public class Session {
 
     public void run() {
         Client client = new Client(collectionManager, historyDeque);
-        client.userInput();
+        client.executeCommand();
     }
 }
