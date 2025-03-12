@@ -14,9 +14,13 @@ public class Client {
         this.historyDeque = historyDeque;
     }
 
+    public void interact() {
+        System.out.print("Enter command: ");
+        executeCommand();
+    }
+
     public String userInput() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter command: ");
         String input = scanner.nextLine();
         return input.trim();
     }
