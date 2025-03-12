@@ -1,51 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tickets>
     <ticket>
-        <id>1</id>
-        <name>dima</name>
-        <coordinates>123,228.0</coordinates>
-        <date>2025-03-10T14:18:03.713320200</date>
-        <price>1000</price>
-        <type>USUAL</type>
-        <birthday>2025-03-10T14:18:03.710736400+03:00[Europe/Moscow]</birthday>
-        <height>178</height>
-        <weight>65</weight>
-        <location>1,2.0,3.0</location>
+        <id>2</id>
+        <name>123</name>
+        <coordinates>123,123.0</coordinates>
+        <date>2025-03-11T19:19:31.353707200</date>
+        <price>123</price>
+        <type>VIP</type>
+        <birthday>2006-08-21T00:00+04:00[Europe/Moscow]</birthday>
+        <height>123</height>
+        <weight>123</weight>
+        <location>1,1.0,1.0</location>
     </ticket>
     <ticket>
         <id>3</id>
-        <name>vova</name>
-        <coordinates>123,228.0</coordinates>
-        <date>2025-03-10T15:46:29.972033500</date>
-        <price>1000</price>
-        <type>USUAL</type>
-        <birthday>2025-03-10T15:46:29.972033500+03:00[Europe/Moscow]</birthday>
-        <height>178</height>
-        <weight>65</weight>
-        <location>1,2.0,3.0</location>
-    </ticket>
-    <ticket>
-        <id>4</id>
-        <name>dima</name>
-        <coordinates>123,228.0</coordinates>
-        <date>2025-03-10T16:15:21.787091600</date>
-        <price>1500</price>
-        <type>USUAL</type>
-        <birthday>2025-03-10T16:15:21.787091600+03:00[Europe/Moscow]</birthday>
-        <height>178</height>
-        <weight>65</weight>
-        <location>1,2.0,3.0</location>
-    </ticket>
-    <ticket>
-        <id>5</id>
-        <name>dima</name>
-        <coordinates>123,228.0</coordinates>
-        <date>2025-03-10T16:15:29.833024100</date>
-        <price>2000</price>
-        <type>USUAL</type>
-        <birthday>2025-03-10T16:15:29.833024100+03:00[Europe/Moscow]</birthday>
-        <height>178</height>
-        <weight>65</weight>
-        <location>1,2.0,3.0</location>
+        <name>123</name>
+        <coordinates>123,22222.0</coordinates>
+        <date>2025-03-11T19:20:00.827768300</date>
+        <price>333333333333333</price>
+        <type>VIP</type>
+        <birthday>2000-12-21T00:00+03:00[Europe/Moscow]</birthday>
+        <height>123</height>
+        <weight>123</weight>
+        <location>1,1.0,1.0</location>
     </ticket>
 </Tickets>
