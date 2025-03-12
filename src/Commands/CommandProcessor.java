@@ -30,8 +30,8 @@ public class CommandProcessor {
         commands.put("exit", new ExitCommand());
 
         // Команды с аргументами
-        commands.put("add", new AddCommand(collectionManager));
-        commands.put("update", new UpdateIdCommand());
+        commands.put("add", new AddCommand(collectionManager, historyDeque));
+        commands.put("update", new UpdateIdCommand(collectionManager, historyDeque));
         commands.put("remove_by_id", new RemoveByIdCommand(collectionManager));
         commands.put("execute_script", new ExecuteScriptCommand(new CommandProcessor(collectionManager, historyDeque)));
         commands.put("remove_all_by_price", new RemoveAllByPriceCommand(collectionManager));
