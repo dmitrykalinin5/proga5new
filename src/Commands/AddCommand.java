@@ -2,11 +2,15 @@ package Commands;
 
 import Collections.*;
 import Console.Client;
-
+import Validaters.*;
 import java.sql.SQLOutput;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.*;
 
 /**
  * Класс, который реализует добавление элемента в коллекцию
@@ -14,10 +18,11 @@ import java.util.Arrays;
 
 public class AddCommand implements Command {
     private final CollectionManager collectionManager;
+    private Deque<String> historyDeque;
 
-
-    public AddCommand(CollectionManager collectionManager) {
+    public AddCommand(CollectionManager collectionManager, Deque<String> history) {
         this.collectionManager = collectionManager;
+        this.historyDeque = history;
     }
 
     /**
@@ -26,43 +31,61 @@ public class AddCommand implements Command {
      */
     @Override
     public void execute(String[] args) {
+        Client client = new Client(collectionManager, historyDeque); // добавить аргументы
+
         int newId = collectionManager.getNextId();
-        Client client = new Client(); // добавить аргументы
-        System.out.print("Введите ваше имя: ");
-        String name = client.userInput(); // имя
-        System.out.print("\nВведите координату x: ");
-        int x = Integer.parseInt(client.userInput());
-        System.out.print("\nВвдите координату y: ");
-        double y = Double.parseDouble(client.userInput());
+
+        String message = "Введите ваше имя: ";
+        NameValidation nameValidation = new NameValidation(client, message);
+        String name = nameValidation.getName();
+
+        System.out.println("Ввод координат:");
+        message = "Введите координату x: ";
+        XCoordinateValidation xCoordinateValidation = new XCoordinateValidation(client, message);
+        int x = xCoordinateValidation.getX();
+
+        message = "Введите координату y: ";
+        YCoordinateValidation yCoordinateValidation = new YCoordinateValidation(client, message);
+        double y = yCoordinateValidation.getY();
+
         Coordinates coordinates = new Coordinates(x, y); // коорды
         LocalDateTime date = LocalDateTime.now(); // дата
-        System.out.print("\nВведите цену: ");
-        int price = Integer.parseInt(client.userInput());
-        System.out.print("\nВведите тип вашего билета(VIP, USUAL, CHEAP): ");
-        TicketType ticketType = TicketType.valueOf(client.userInput());
-        System.out.print("\nВведите дату рождения в формате DD.MM.YYYY: ");
-        // сделать парсинг, дата должны быть в формате выше
-        String birthday = ZonedDateTime.parse();
-        System.out.print("\nВведите ваш рост: ");
-        Long height = Long.parseLong(client.userInput());
-        System.out.print("\nВведите ваш вес (необязательно): ");
-        Integer weight = Integer.parseInt(client.userInput());
-        System.out.print("\nВведите вашу локацию (скип похуй)");
-        Location location = new Location(1, 1, 1);
-        Person person = new Person(birthday, height, weight, location);
 
-        /*
-        String[] elements = args[1].split(",");
-        Coordinates coordinates = new Coordinates(Integer.parseInt(elements[1].split(";")[0]), Double.parseDouble(elements[1].split(";")[1]));
-        Location location = new Location(Long.parseLong(elements[7].split(";")[0]), Double.parseDouble(elements[7].split(";")[1]), Float.parseFloat(elements[7].split(";")[2]));
-         */
-        Person person = new Person(java.time.ZonedDateTime.now(/*elements[5]*/),
-                Long.parseLong(elements[5]), Integer.parseInt(elements[6]), location);
-        // имя, координаты через ";", цена, тип (USUAL, VIP, CHEAP), др, рост, вес, локация (x;y;z)
-        Ticket ticket = new Ticket(newId, elements[0], coordinates,
-                LocalDateTime.now(), Long.parseLong(elements[2]), TicketType.valueOf(elements[3]), person);
+        message = "Введите цену: ";
+        PriceValidation priceValidation = new PriceValidation(client, message);
+        Long price = priceValidation.getPrice();
+
+        message = "Введите тип вашего билета(VIP, USUAL, CHEAP): ";
+        TicketTypeValidation ticketTypeValidation = new TicketTypeValidation(client, message);
+        TicketType ticketType = ticketTypeValidation.getTicketType();
+
+        message = "Введите дату рождения в формате DD.MM.YYYY: ";
+        BirthdayValidation birthdayValidation = new BirthdayValidation(client, message);
+        String birthdayInput = birthdayValidation.getBirthday();
+        // парсинг даты из формата DD.MM.YYYY в ZonedDateTime
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        LocalDate localdate = LocalDate.parse(birthdayInput, formatter);
+        ZonedDateTime birthday = localdate.atStartOfDay(ZoneId.systemDefault());
+
+
+        message = "Введите ваш рост: ";
+        HeightValidation heightValidation = new HeightValidation(client, message);
+        Long height = heightValidation.getHeight();
+
+        message = "Введите ваш вес: ";
+        WeightValidation weightValidation = new WeightValidation(client, message);
+        Integer weight = weightValidation.getweight();
+
+
+        message = "Введите вашу локацию (скип похуй)";
+        Location location = new Location(1L, 1, 1.0F);
+
+        Person person = new Person(birthday, height, weight, location);
+        Ticket ticket = new Ticket(newId, name, coordinates, date,
+                price, ticketType, person);
+
         this.collectionManager.add(ticket);
-        System.out.printf("Добавить элемент %s\n", ticket.toString());
+        System.out.println("Элемент добавлен");
     }
 
     @Override
