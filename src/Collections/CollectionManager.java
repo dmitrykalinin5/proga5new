@@ -4,8 +4,7 @@ import Collections.Ticket;
 
 import java.sql.SQLOutput;
 import java.time.LocalDateTime;
-import java.util.Iterator;
-import java.util.PriorityQueue;
+import java.util.*;
 import java.io.*;
 import java.util.regex.*;
 
@@ -14,7 +13,7 @@ import java.util.regex.*;
  */
 
 public class CollectionManager {
-    private final PriorityQueue<Ticket> queue = new PriorityQueue<>();
+    private final PriorityQueue<Ticket> queue = new PriorityQueue<>(Comparator.comparing(Ticket::getId));
     private final LocalDateTime creationTime;
     private int lastId = 0;
 
@@ -32,10 +31,21 @@ public class CollectionManager {
 
     /**
      * Метод, который возвращает следующий id
-     * @return ++lastId
+     * @return nextId
      */
     public int getNextId() {
-        return ++lastId;
+        // Собираем все существующие id
+        Set<Integer> existingIds = new HashSet<>();
+        for (Ticket ticket : this.queue) {
+            existingIds.add(ticket.getId());
+        }
+        int nextId = 1;
+        while (existingIds.contains(nextId)) {
+            nextId++;
+        }
+        // Обновляем lastId, если нужно
+        this.lastId = Math.max(this.lastId, nextId);
+        return nextId;
     }
 
     /**
@@ -47,9 +57,9 @@ public class CollectionManager {
             return "Коллекция пуста\n";
         } else {
             StringBuilder result = new StringBuilder();
-            for (Ticket ticket : this.queue) {
-                result.append(ticket).append("\n");
-            }
+            this.queue.stream()
+                    .sorted(Comparator.comparing(Ticket::getId))
+                    .forEach(ticket -> result.append(ticket.toString()).append("\n"));
             return result.toString();
         }
     }
@@ -142,6 +152,21 @@ public class CollectionManager {
             System.out.println(this.queue.peek());
             this.queue.remove(this.queue.peek());
             return true;
+        }
+    }
+
+
+    public void update(int id, String element, String newValue) {
+        for (Ticket ticket : this.queue) {
+            if (ticket.getId() == id) {
+                switch (element.toLowerCase()) {
+                    case "name":
+                        ticket.setName(newValue);
+                        break;
+                    case "price":
+
+                }
+            }
         }
     }
 
