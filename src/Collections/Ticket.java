@@ -52,9 +52,10 @@ public class Ticket implements Comparable<Ticket> {
 
     public void setType(TicketType type) { this.type = type; }
 
-    public void setBirthday(String birthday) {
-
-    }
+    public void setBirthday(ZonedDateTime birthday) { person.setBirhday(birthday); }
+    public void setHeight(Long height) { person.setHeight(height); }
+    public void setWeight(int weight) { person.setWeight(weight); }
+    public void setLocation(Location location) { person.setLocation(location); }
 
     @Override
     public int compareTo(Ticket other) {

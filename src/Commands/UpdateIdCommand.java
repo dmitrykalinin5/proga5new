@@ -19,13 +19,24 @@ public class UpdateIdCommand implements Command {
 
     @Override
     public void execute(String[] args) {
-        Client client = new Client(collectionManager, historyDeque);
-        id = Integer.parseInt(args[1]);
-        System.out.println("Какой элемент вы хотите обновить? (имя, координаты, цена, тип билета");
-        System.out.print("дата рождения, рост, вес, локация): ");
-        String input = client.userInput();
-//        collectionManager.update(id, input);
-//        System.out.println("Апдейдим айди " + Arrays.toString(args));
+        try {
+            Client client = new Client(collectionManager, historyDeque);
+            id = Integer.parseInt(args[1]);
+            System.out.println("Какой элемент вы хотите обновить? (имя, координаты, цена, тип билета");
+            System.out.print("дата рождения, рост, вес, локация): ");
+            while (true) {
+                String input = client.userInput();
+                boolean isUpdated = collectionManager.update(id, input);
+                if (isUpdated) {
+                    break;
+                } else {
+                    System.out.print("Некорректный ввод, попробуйте еще раз: ");
+                }
+            }
+            System.out.println("Данные обновлены");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Некорректный ввод");
+        }
     }
 
     @Override

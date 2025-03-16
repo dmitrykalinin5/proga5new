@@ -51,7 +51,7 @@ public class CommandProcessor {
             command.execute(parts);
             saveCommand(parts[0]);
         } catch (NullPointerException exeption) {
-            System.out.println("Такой команды не существует " + exeption.getMessage());
+            System.out.println("Такой команды не существует");
         }
     }
 

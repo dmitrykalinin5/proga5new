@@ -25,6 +25,10 @@ public class BirthdayValidation implements Validation {
                 System.out.print(message);
                 this.birthday = client.userInput();
                 String[] input = this.birthday.split("\\.");
+                if (input[0].length() != 2 || input[1].length() != 2 || input[2].length() != 4) {
+                    System.out.println("Некорректный ввод");
+                    continue;
+                }
                 int day = Integer.parseInt(input[0]);
                 int month = Integer.parseInt(input[1]);
                 int year = Integer.parseInt(input[2]);
@@ -38,9 +42,7 @@ public class BirthdayValidation implements Validation {
                 }
             } catch (NullPointerException e) {
                 System.out.println("Дата не может быть null");
-            } catch (NumberFormatException e) {
-                System.out.println("Некорректный ввод");
-            } catch (ArrayIndexOutOfBoundsException e) {
+            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 System.out.println("Некорректный ввод");
             }
         }

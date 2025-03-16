@@ -7,8 +7,8 @@ import Validaters.PersonValidator;
  */
 
 public class Person {
-    private final ZonedDateTime birthday; //Поле не может быть null
-    private final Long height; //Поле не может быть null, Значение поля должно быть больше 0
+    private ZonedDateTime birthday; //Поле не может быть null
+    private Long height; //Поле не может быть null, Значение поля должно быть больше 0
     private int weight; //Значение поля должно быть больше 0
     private Location location; //Поле может быть null
 
@@ -35,6 +35,10 @@ public class Person {
     public Long getHeight() { return height; }
     public int getWeight() { return weight; }
     public Location getLocation() { return location; }
+    public void setBirhday(ZonedDateTime birthday) { this.birthday = birthday;}
+    public void setHeight(Long height) { this.height = height; }
+    public void setWeight(int weight) { this.weight = weight; }
+    public void setLocation(Location location) { this.location = location; }
 
 
 }

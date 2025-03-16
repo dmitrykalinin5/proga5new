@@ -1,12 +1,18 @@
 package Collections;
 
 import Collections.Ticket;
+import Validaters.*;
 
 import java.sql.SQLOutput;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.io.*;
 import java.util.regex.*;
+import Console.Client;
 
 /**
  * Класс для управления коллекцией
@@ -156,22 +162,75 @@ public class CollectionManager {
     }
 
 
-    public void update(int id, String element, String newValue) {
+    public boolean update(int id, String element) {
         for (Ticket ticket : this.queue) {
             if (ticket.getId() == id) {
+                CollectionManager c = new CollectionManager();
+                Deque<String> h = new ArrayDeque<>();
+                Client client = new Client(c, h);
+                String message;
                 switch (element.toLowerCase()) {
                     case "имя":
-                        ticket.setName(newValue);
-                        break;
+                        message = "Введите обновленное имя: ";
+                        NameValidation nameValidation = new NameValidation(client, message);
+                        String name = nameValidation.getName();
+                        ticket.setName(name);
+                        return true;
                     case "координаты":
-
+                        System.out.println("Ввод новых координат:");
+                        message = "Введите обновленную координату x: ";
+                        XCoordinateValidation xCoordinateValidation = new XCoordinateValidation(client, message);
+                        int x = xCoordinateValidation.getX();
+                        message = "Введите обновленную координату y: ";
+                        YCoordinateValidation yCoordinateValidation = new YCoordinateValidation(client, message);
+                        double y = yCoordinateValidation.getY();
+                        Coordinates coords = new Coordinates(x, y);
+                        ticket.setCoordinates(coords);
+                        return true;
                     case "цена":
-                        ticket.setPrice(newValue);
-                        case "тип"
-
+                        message = "Введите обновленную цену: ";
+                        PriceValidation priceValidation = new PriceValidation(client, message);
+                        Long price = priceValidation.getPrice();
+                        ticket.setPrice(price);
+                        return true;
+                    case "тип билета":
+                        message = "Введите обновленный тип билета (VIP, USUAL, CHEAP): ";
+                        TicketTypeValidation ticketTypeValidation = new TicketTypeValidation(client, message);
+                        TicketType ticketType = ticketTypeValidation.getTicketType();
+                        ticket.setType(ticketType);
+                        return true;
+                    case "дата рождения":
+                        message = "Введите обновленную дату рождения в формате DD.MM.YYYY: ";
+                        BirthdayValidation birthdayValidation = new BirthdayValidation(client, message);
+                        String birthdayInput = birthdayValidation.getBirthday();
+                        // парсинг даты из формата DD.MM.YYYY в ZonedDateTime
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+                        LocalDate localdate = LocalDate.parse(birthdayInput, formatter);
+                        ZonedDateTime birthday = localdate.atStartOfDay(ZoneId.systemDefault());
+                        ticket.setBirthday(birthday);
+                        return true;
+                    case "рост":
+                        message = "Введите обновленный рост: ";
+                        HeightValidation heightValidation = new HeightValidation(client, message);
+                        Long height = heightValidation.getHeight();
+                        ticket.setHeight(height);
+                        return true;
+                    case "вес":
+                        message = "Введите обновленный вес: ";
+                        WeightValidation weightValidation = new WeightValidation(client, message);
+                        int weight = weightValidation.getweight();
+                        ticket.setWeight(weight);
+                        return true;
+                    case "локация":
+                        message = "Введите обновленные значения координат через пробел (x y z): ";
+                        LocationValidation locationValidation = new LocationValidation(client, message);
+                        Location loc = locationValidation.getLocation();
+                        ticket.setLocation(loc);
+                        return true;
                 }
             }
         }
+        return false;
     }
 
     /**
