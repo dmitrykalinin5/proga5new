@@ -1,27 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tickets>
     <ticket>
-        <id>2</id>
+        <id>1</id>
+        <name>Павел</name>
+        <coordinates>13, 280.0</coordinates>
+        <date>2025-03-16T16:11:42.122923200</date>
+        <price>500</price>
+        <type>CHEAP</type>
+        <birthday>2002-03-02T00:00+03:00[Europe/Moscow]</birthday>
+        <height>170</height>
+        <weight>60</weight>
+        <location>43,55.0,12.0</location>
+    </ticket>
+    <ticket>
+        <id>3</id>
         <name>123</name>
-        <coordinates>123,123.0</coordinates>
-        <date>2025-03-11T19:19:31.353707200</date>
-        <price>123</price>
-        <type>VIP</type>
-        <birthday>2006-08-21T00:00+04:00[Europe/Moscow]</birthday>
+        <coordinates>123, 22222.0</coordinates>
+        <date>2025-03-11T19:20:00.827768300</date>
+        <price>333333333333333</price>
+        <type>USUAL</type>
+        <birthday>2001-12-21T00:00+03:00[Europe/Moscow]</birthday>
         <height>123</height>
         <weight>123</weight>
         <location>1,1.0,1.0</location>
     </ticket>
     <ticket>
-        <id>3</id>
-        <name>123</name>
-        <coordinates>123,22222.0</coordinates>
-        <date>2025-03-11T19:20:00.827768300</date>
-        <price>333333333333333</price>
+        <id>2</id>
+        <name>dmitruy</name>
+        <coordinates>123, 123.0</coordinates>
+        <date>2025-03-11T19:19:31.353707200</date>
+        <price>999</price>
         <type>VIP</type>
-        <birthday>2000-12-21T00:00+03:00[Europe/Moscow]</birthday>
-        <height>123</height>
-        <weight>123</weight>
+        <birthday>2006-08-21T00:00+04:00[Europe/Moscow]</birthday>
+        <height>178</height>
+        <weight>65</weight>
         <location>1,1.0,1.0</location>
     </ticket>
 </Tickets>
