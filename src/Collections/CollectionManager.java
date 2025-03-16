@@ -160,10 +160,14 @@ public class CollectionManager {
         for (Ticket ticket : this.queue) {
             if (ticket.getId() == id) {
                 switch (element.toLowerCase()) {
-                    case "name":
+                    case "имя":
                         ticket.setName(newValue);
                         break;
-                    case "price":
+                    case "координаты":
+
+                    case "цена":
+                        ticket.setPrice(newValue);
+                        case "тип"
 
                 }
             }
