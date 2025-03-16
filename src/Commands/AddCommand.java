@@ -43,12 +43,11 @@ public class AddCommand implements Command {
         message = "Введите координату x: ";
         XCoordinateValidation xCoordinateValidation = new XCoordinateValidation(client, message);
         int x = xCoordinateValidation.getX();
-
         message = "Введите координату y: ";
         YCoordinateValidation yCoordinateValidation = new YCoordinateValidation(client, message);
         double y = yCoordinateValidation.getY();
-
         Coordinates coordinates = new Coordinates(x, y); // коорды
+
         LocalDateTime date = LocalDateTime.now(); // дата
 
         message = "Введите цену: ";
@@ -74,11 +73,12 @@ public class AddCommand implements Command {
 
         message = "Введите ваш вес: ";
         WeightValidation weightValidation = new WeightValidation(client, message);
-        Integer weight = weightValidation.getweight();
+        int weight = weightValidation.getweight();
 
 
-        message = "Введите вашу локацию (скип похуй)";
-        Location location = new Location(1L, 1, 1.0F);
+        message = "Введите координаты вашей локации через пробел (x y z): ";
+        LocationValidation locationValidation = new LocationValidation(client, message);
+        Location location = locationValidation.getLocation();
 
         Person person = new Person(birthday, height, weight, location);
         Ticket ticket = new Ticket(newId, name, coordinates, date,
