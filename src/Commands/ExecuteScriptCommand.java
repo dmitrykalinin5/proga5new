@@ -1,17 +1,22 @@
 package Commands;
 
-import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.io.IOException;
-import java.util.Arrays;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import Commands.Command;
+import Commands.CommandProcessor;
 
-/**
- * Класс, который читает файл построчно и выполняет команды, которые в нем находятся
- */
 public class ExecuteScriptCommand implements Command {
-    private CommandProcessor commandProcessor;
+    private final CommandProcessor commandProcessor;
+    private Deque<String> localCommandStack = new ArrayDeque<>();
 
     public ExecuteScriptCommand(CommandProcessor commandProcessor) {
         this.commandProcessor = commandProcessor;
@@ -19,48 +24,66 @@ public class ExecuteScriptCommand implements Command {
 
     private String[] readFile(String fileName) {
         try {
-            String[] content = Files.readString(Path.of(fileName)).split("\n");
-            return content;
-        } catch (NoSuchFileException e) {
-            System.out.println("Файл не найден");
+            return Files.readString(Path.of(fileName)).split("\n");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Ошибка чтения файла: " + e.getMessage());
+            return null;
         }
-        return null;
     }
 
     @Override
     public void execute(String[] args) {
-        String file_name = args[1];
-        String[] fileInput = readFile(file_name);
-//        System.out.println("чо в файле:" + Arrays.toString(fileInput));
-//        System.out.println("отдельыый элемент " + fileInput[0]);
-//        System.out.println("длина файла " + fileInput.length);
-        // Если файл не был найден или произошла ошибка при его чтении, завершаем выполнение метода
-        if (fileInput == null) {
-            return;  // Останавливаем выполнение метода
+        commandProcessor.setScriptFlag(true);
+        List<String> bannedFiles = commandProcessor.getBannedFiles();
+        String fileName = args[1];
+        String[] fileInput = readFile(fileName);
+        if (fileInput == null) return;
+
+        Deque<String> newCommands = new ArrayDeque<>();
+
+        // Заполняем стек с командами из файла
+        for (String line : fileInput) {
+            if (line.split(" ").length > 1 && Objects.equals(line.split(" ")[1], fileName)) {
+                localCommandStack.addFirst(line);
+                commandProcessor.addFirstCommandtoStack(line);
+                bannedFiles.add(line.split(" ")[1]);
+                commandProcessor.setBannedFiles(bannedFiles);
+//            } else if (line.split(" ").length > 1 && !Objects.equals(line.split(" ")[1], fileName)) {
+//                localCommandStack.addFirst(line);
+//                Deque<String> helpfulCommandStack = new ArrayDeque<>();
+//                for (String element : commandProcessor.getCommandStack()) {
+//                    helpfulCommandStack.addFirst(commandProcessor.removeFirstCommandStack());
+//                }
+//                for (String element : localCommandStack) {
+//                    helpfulCommandStack.addFirst(localCommandStack.removeFirst());
+//                }
+//                for (String element : helpfulCommandStack) {
+//                    System.out.println("helpful " + element);
+//                }
+//                commandProcessor.setCommandStack(helpfulCommandStack);
+            } else {
+//                commandProcessor.addFirstCommandtoStack(line);
+            }
         }
-        // нерабочий If
-        if (fileInput[0] == null) {
-            System.out.println("Файл пустой");
-            return;
-        }
-        System.out.println("Запуск скрипта " + file_name + "...");
-        for (String command : fileInput) {
-            command = command.trim();
-            System.out.println("Выполнение команды: " + command.split(" ")[0]);
-            //System.out.println(command);
-            commandProcessor.CommandPut();
-            commandProcessor.executeCommand(command);
+
+        Deque<String> mergeStack = new ArrayDeque<>(newCommands);
+
+
+
+        commandProcessor.CommandPut();
+        while (!commandProcessor.getCommandStack().isEmpty()) {
+            commandProcessor.executeScript();
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        System.out.println("Скрипт выполнен");
+        commandProcessor.setScriptFlag(false);
     }
 
     @Override
-    public String description() { return "Executes script"; };
+    public String description() {
+        return "Executes script";
+    }
 }
