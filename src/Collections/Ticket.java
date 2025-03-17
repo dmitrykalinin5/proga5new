@@ -36,6 +36,8 @@ public class Ticket implements Comparable<Ticket> {
 
     public TicketType getType() { return type; }
 
+    public Person getPerson() { return person; }
+
     public ZonedDateTime getBirthday() { return person.getBirthday(); }
 
     public Long getHeight() { return person.getHeight(); }

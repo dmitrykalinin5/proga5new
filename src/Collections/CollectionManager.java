@@ -168,6 +168,9 @@ public class CollectionManager {
         }
     }
 
+    public PriorityQueue<Ticket> getQueue() {
+        return this.queue;
+    }
 
     public boolean update(int id, String element) {
         try {

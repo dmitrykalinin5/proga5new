@@ -30,7 +30,7 @@ public class CommandProcessor {
         commands.put("remove_head", new RemoveHeadCommand(collectionManager));
         commands.put("history", new HistoryCommand(this));
         commands.put("min_by_id", new MinByIdCommand(collectionManager));
-        //commands.put("group_counting_by_person", new Command(collectionManager));
+        commands.put("group_counting_by_person", new GroupCountingByPersonCommand(collectionManager));
         commands.put("exit", new ExitCommand());
 
         // Команды с аргументами
@@ -47,9 +47,6 @@ public class CommandProcessor {
         System.out.println("Текущая команда: " + currentCommand);
         if (args[0].equals("execute_script") && bannedFiles.contains(args[1])) {
             System.out.println("Скрипт не может вызывать сам себя");
-//        } else if (args[0].equals("execute_script") && !bannedFiles.contains(args[1])) {
-//            bannedFiles.add(args[1]);
-//            System.out.println("Скрипт не может вызывать себя или другой скрипт в котором содержится этот");
         } else {
             Command command = commands.get(args[0]);
             command.execute(args);
