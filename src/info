@@ -8,7 +8,7 @@ id, имя, координаты через ;, цена, тип (USUAL, VIP, CHE
 add dima,123;228,1000,USUAL,21.08.2006,178,65,1;2;3
 execute_script script.txt
 execute_script second.txt
-
+group_counting_by_person
 
 
 help

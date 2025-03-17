@@ -2,12 +2,12 @@ package Validaters;
 
 import Commands.CommandProcessor;
 import Tools.Validation;
-import Console.Client;
 
 import java.util.Scanner;
 
 /**
- * Класс для валидации роста
+ * Класс для валидации роста.
+ * Проверяет, является ли введенное значение роста валидным (больше 0).
  */
 public class HeightValidation implements Validation {
     private Long Height;
@@ -15,8 +15,10 @@ public class HeightValidation implements Validation {
     private CommandProcessor commandProcessor;
 
     /**
-     * Конструктор класса
-     * @param message
+     * Конструктор класса.
+     *
+     * @param message Сообщение, которое будет выведено пользователю для ввода роста.
+     * @param commandProcessor Компонент для обработки команд (например, для выполнения скриптов).
      */
     public HeightValidation(String message, CommandProcessor commandProcessor) {
         this.message = message;
@@ -25,14 +27,17 @@ public class HeightValidation implements Validation {
     }
 
     /**
-     * Метод, который валидирует
-     * @return
+     * Метод для валидации введенного роста.
+     * Запрашивает ввод роста у пользователя, проверяет его корректность (рост должен быть больше 0).
+     *
+     * @return Корректное значение роста, если оно валидно.
      */
     public Long validation() {
         while (true) {
             try {
                 System.out.print(message);
                 String input;
+                // Если скрипт выполняется, получаем команду из скрипта, иначе ожидаем ввод с клавиатуры
                 if (commandProcessor.getScriptFlag()) {
                     input = commandProcessor.getNextCommand().trim();
                     System.out.println(input);
@@ -41,6 +46,7 @@ public class HeightValidation implements Validation {
                     input = scanner.nextLine().trim();
                 }
                 this.Height = Long.parseLong(input);
+                // Проверяем, что рост больше 0
                 if (!validate()) {
                     System.out.println("Рост должен быть больше 0");
                     continue;
@@ -52,11 +58,30 @@ public class HeightValidation implements Validation {
         }
     }
 
+    /**
+     * Метод для получения значения роста.
+     *
+     * @return Введенный рост.
+     */
     public Long getHeight() { return Height; }
 
+    /**
+     * Метод для проверки валидности введенного роста.
+     *
+     * @return true, если рост валиден (больше 0), иначе false.
+     */
     @Override
-    public boolean validate() {return Height != null && Height > 0;}
+    public boolean validate() {
+        return Height != null && Height > 0;
+    }
 
+    /**
+     * Метод для получения сообщения об ошибке в случае некорректного роста.
+     *
+     * @return Сообщение об ошибке.
+     */
     @Override
-    public String getErrorMessage() {return "Ошибка в росте";}
+    public String getErrorMessage() {
+        return "Ошибка в росте";
+    }
 }

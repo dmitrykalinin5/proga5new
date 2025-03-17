@@ -4,13 +4,30 @@ import Collections.CollectionManager;
 import Collections.Ticket;
 import java.util.*;
 
+/**
+ * Команда для группировки билетов по росту человека (Person) и подсчета количества элементов в каждой группе.
+ */
 public class GroupCountingByPersonCommand implements Command {
     private CollectionManager collectionManager;
 
+    /**
+     * Конструктор для создания команды, которая работает с коллекцией.
+     *
+     * @param collectionManager Менеджер коллекции, с которой будет работать команда
+     */
     public GroupCountingByPersonCommand(CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
     }
 
+    /**
+     * Выполняет группировку билетов по росту (из объекта Person) и выводит количество билетов в каждой группе.
+     *
+     * Процесс:
+     * 1. Группирует билеты по полю "рост" объекта Person.
+     * 2. Выводит количество билетов в каждой группе, сгруппированной по росту.
+     *
+     * @param args Аргументы команды (не используются в данной реализации)
+     */
     @Override
     public void execute(String[] args) {
         // Группируем билеты по росту
@@ -36,6 +53,11 @@ public class GroupCountingByPersonCommand implements Command {
         System.out.println(result.toString());
     }
 
+    /**
+     * Описание команды.
+     *
+     * @return Описание команды, которая группирует билеты по росту.
+     */
     @Override
     public String description() {
         return "Grouping by Person (по росту)";

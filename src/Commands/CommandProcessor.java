@@ -1,11 +1,13 @@
 package Commands;
 
 import Collections.CollectionManager;
-import Commands.CommandProcessor;
-
 import java.util.*;
 
+/**
+ * Класс для обработки команд, выполнения их и управления историей команд.
+ */
 public class CommandProcessor {
+
     private final Map<String, Command> commands = new HashMap<>();
     private final CollectionManager collectionManager;
     private Deque<String> historyDeque;
@@ -14,11 +16,20 @@ public class CommandProcessor {
     private List<String> bannedFiles = new ArrayList<>();
     private Deque<String> commandStack = new ArrayDeque<>();
 
+    /**
+     * Конструктор класса CommandProcessor, инициализирует необходимые компоненты.
+     *
+     * @param collectionManager Объект для работы с коллекцией
+     * @param historyDeque История команд
+     */
     public CommandProcessor(CollectionManager collectionManager, Deque<String> historyDeque) {
         this.collectionManager = collectionManager;
         this.historyDeque = historyDeque;
     }
 
+    /**
+     * Метод, который добавляет команды в список доступных команд.
+     */
     public void CommandPut() {
         // Список команд
         commands.put("help", new HelpCommand());
@@ -41,6 +52,10 @@ public class CommandProcessor {
         commands.put("remove_all_by_price", new RemoveAllByPriceCommand(collectionManager));
     }
 
+    /**
+     * Метод для выполнения скрипта команд.
+     * Проверяет, не вызывает ли скрипт сам себя.
+     */
     public void executeScript() {
         String currentCommand = getNextCommand();
         String[] args = currentCommand.split(" ");
@@ -54,52 +69,96 @@ public class CommandProcessor {
         }
     }
 
+    /**
+     * Устанавливает стек команд.
+     *
+     * @param commandStack Стек команд
+     */
     public void setCommandStack(Deque<String> commandStack) {
         this.commandStack = commandStack;
     }
 
+    /**
+     * Удаляет и возвращает первую команду из стека.
+     *
+     * @return Первая команда в стеке
+     */
     public String removeFirstCommandStack() {
         return commandStack.removeFirst();
     }
 
+    /**
+     * Удаляет и возвращает последнюю команду из стека.
+     *
+     * @return Последняя команда в стеке
+     */
     public String removeLastCommandStack() {
         return commandStack.removeLast();
     }
 
+    /**
+     * Получает текущий стек команд.
+     *
+     * @return Стек команд
+     */
     public Deque<String> getCommandStack() {
         return commandStack;
     }
 
+    /**
+     * Добавляет команду в начало стека команд.
+     *
+     * @param command Команда для добавления
+     */
     public void addFirstCommandtoStack(String command) {
         commandStack.addFirst(command);
     }
 
+    /**
+     * Добавляет команду в конец стека команд.
+     *
+     * @param command Команда для добавления
+     */
     public void addLastCommandtoStack(String command) {
         commandStack.addLast(command);
     }
 
+    /**
+     * Получает следующую команду из стека и удаляет её.
+     *
+     * @return Следующая команда из стека
+     */
     public String getNextCommand() {
         return this.commandStack.removeFirst().trim();
     }
 
+    /**
+     * Устанавливает флаг скрипта, который указывает на выполнение скрипта.
+     *
+     * @param flag Значение флага
+     */
     public void setScriptFlag(boolean flag) {
         this.scriptFlag = flag;
     }
 
+    /**
+     * Получает флаг скрипта.
+     *
+     * @return Флаг скрипта
+     */
     public boolean getScriptFlag() {
         return scriptFlag;
     }
 
     /**
-     * Метод, который выполняет программу
-     * @param input, входные данные (сама команда)
+     * Выполняет команду, переданную через входные данные.
+     *
+     * @param input Входные данные с командой
      */
     public void executeCommand(String input) {
         String[] parts = input.split(" ");
         String commandName = parts[0];
         Command command = commands.get(commandName);
-//        System.out.println("Parts: " + Arrays.toString(parts));
-//        System.out.println("Значение: " + commandName);
         try {
             command.execute(parts);
             saveCommand(parts[0]);
@@ -108,6 +167,11 @@ public class CommandProcessor {
         }
     }
 
+    /**
+     * Сохраняет команду в историю, если её размер не превышает максимума.
+     *
+     * @param command Команда для сохранения
+     */
     public void saveCommand(String command) {
         int maxSize = 13;
         if (this.historyDeque.size() >= maxSize) {
@@ -116,14 +180,29 @@ public class CommandProcessor {
         this.historyDeque.addLast(command);
     }
 
+    /**
+     * Получает очередь команд из истории.
+     *
+     * @return История команд
+     */
     public Deque<String> getDeque() {
         return this.historyDeque;
     }
 
+    /**
+     * Получает список запрещённых файлов.
+     *
+     * @return Список запрещённых файлов
+     */
     public List<String> getBannedFiles() {
         return bannedFiles;
     }
 
+    /**
+     * Устанавливает список запрещённых файлов.
+     *
+     * @param bannedFiles Новый список запрещённых файлов
+     */
     public void setBannedFiles(List<String> bannedFiles) {
         this.bannedFiles = bannedFiles;
     }

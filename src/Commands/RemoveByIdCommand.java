@@ -2,15 +2,29 @@ package Commands;
 
 import Collections.CollectionManager;
 
-import java.util.Collection;
-
-public class RemoveByIdCommand implements Command{
+/**
+ * Команда для удаления элемента из коллекции по его идентификатору.
+ * Этот класс реализует команду, которая удаляет элемент из коллекции, используя его уникальный идентификатор.
+ */
+public class RemoveByIdCommand implements Command {
     private CollectionManager collectionManager;
 
+    /**
+     * Конструктор для создания объекта RemoveByIdCommand.
+     *
+     * @param collectionManager Объект, управляющий коллекцией
+     */
     public RemoveByIdCommand(CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
     }
 
+    /**
+     * Выполняет команду удаления элемента из коллекции по его id.
+     * Если элемент с указанным id существует и успешно удалён, выводится сообщение об успешном удалении.
+     * В случае ошибки (например, если id не существует или неправильно указан), выводится соответствующее сообщение.
+     *
+     * @param args Аргументы команды, где args[1] — это id элемента, который нужно удалить.
+     */
     @Override
     public void execute(String[] args) {
         try {
@@ -25,6 +39,13 @@ public class RemoveByIdCommand implements Command{
         }
     }
 
+    /**
+     * Описание команды.
+     *
+     * @return Описание команды, которая удаляет элемент по его id из коллекции.
+     */
     @Override
-    public String description() { return "Removes an element by its id"; }
+    public String description() {
+        return "Removes an element by its id";
+    }
 }

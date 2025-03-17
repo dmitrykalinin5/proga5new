@@ -1,10 +1,17 @@
 package Commands;
 
+/**
+ * Команда для вывода справочной информации о доступных командах.
+ * Этот класс реализует команду, которая выводит на экран описание всех доступных команд.
+ */
 public class HelpCommand implements Command {
-//    Help_Command() {
-//        System.out.println("Help_Command");
-//    }
 
+    /**
+     * Выполняет команду вывода справки по возможным командам.
+     * Этот метод выводит список доступных команд и их описание.
+     *
+     * @param args Аргументы команды (не используются в данном случае)
+     */
     @Override
     public void execute(String[] args) {
         System.out.printf("Справка по возможным командам:\n" +
@@ -26,6 +33,13 @@ public class HelpCommand implements Command {
                 "16. group_counting_by_person - сгруппировать элементы коллекции по значению поля person, вывести количество элементов в каждой группе.\n");
     }
 
+    /**
+     * Описание команды.
+     *
+     * @return Описание команды, которая выводит справку о доступных командах
+     */
     @Override
-    public String description() { return "Displays help information about commands"; }
+    public String description() {
+        return "Displays help information about commands";
+    }
 }

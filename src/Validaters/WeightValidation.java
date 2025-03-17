@@ -7,7 +7,8 @@ import Console.Client;
 import java.util.Scanner;
 
 /**
- * Класс для валидации роста
+ * Класс для валидации веса.
+ * Проверяет, что введенный вес является положительным числом.
  */
 public class WeightValidation implements Validation {
     private int weight;
@@ -15,8 +16,10 @@ public class WeightValidation implements Validation {
     private CommandProcessor commandProcessor;
 
     /**
-     * Конструктор класса
-     * @param message
+     * Конструктор класса WeightValidation.
+     *
+     * @param message Сообщение, которое будет выведено при запросе ввода веса.
+     * @param commandProcessor Объект для обработки команд, включая работу с флагом скрипта.
      */
     public WeightValidation(String message, CommandProcessor commandProcessor) {
         this.message = message;
@@ -25,8 +28,10 @@ public class WeightValidation implements Validation {
     }
 
     /**
-     * Метод, который валидирует
-     * @return this.weight, если валидация прошла успешно
+     * Метод для валидации веса.
+     * Запрашивает у пользователя ввод и проверяет, что вес больше 0.
+     *
+     * @return Валидированное значение веса.
      */
     public int validation() {
         while (true) {
@@ -47,16 +52,38 @@ public class WeightValidation implements Validation {
                 }
                 return this.weight;
             } catch (NumberFormatException | NullPointerException e) {
-                System.out.println("Некорректный ввод" + e.getMessage());
+                System.out.println("Некорректный ввод: " + e.getMessage());
             }
         }
     }
 
-    public int getweight() { return weight; }
+    /**
+     * Метод для получения валидированного значения веса.
+     *
+     * @return Введенный вес.
+     */
+    public int getweight() {
+        return weight;
+    }
 
+    /**
+     * Метод для валидации веса.
+     * Проверяет, что вес больше 0.
+     *
+     * @return true, если вес больше 0, иначе false.
+     */
     @Override
-    public boolean validate() {return weight > 0;}
+    public boolean validate() {
+        return weight > 0;
+    }
 
+    /**
+     * Метод для получения сообщения об ошибке.
+     *
+     * @return Сообщение об ошибке в случае некорректного ввода веса.
+     */
     @Override
-    public String getErrorMessage() {return "Ошибка в росте";}
+    public String getErrorMessage() {
+        return "Ошибка в росте";  // Возможно, это сообщение должно быть более специфичным для веса, например, "Ошибка в весе"
+    }
 }

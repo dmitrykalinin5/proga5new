@@ -19,7 +19,6 @@ import Console.Client;
 /**
  * Класс для управления коллекцией
  */
-
 public class CollectionManager {
     private final PriorityQueue<Ticket> queue = new PriorityQueue<>(Comparator.comparing(Ticket::getId));
     private final LocalDateTime creationTime;
@@ -168,10 +167,20 @@ public class CollectionManager {
         }
     }
 
+    /**
+     * Метод, который возвращает очередь
+     * @return
+     */
     public PriorityQueue<Ticket> getQueue() {
         return this.queue;
     }
 
+    /**
+     * Метод, который обновляет значение элемента в тикете с заданным id
+     * @param id
+     * @param element
+     * @return
+     */
     public boolean update(int id, String element) {
         try {
             for (Ticket ticket : this.queue) {
@@ -368,6 +377,9 @@ public class CollectionManager {
 
     /**
      * Метод достаёт содержимое тега <tag>value</tag>
+     * @param line
+     * @param tagName
+     * @return
      */
     private String extractValue(String line, String tagName) {
         String openTag = "<" + tagName + ">";

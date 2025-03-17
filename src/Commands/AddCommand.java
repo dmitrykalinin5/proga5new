@@ -13,14 +13,22 @@ import java.util.Arrays;
 import java.util.*;
 
 /**
- * Класс, который реализует добавление элемента в коллекцию
+ * Команда для добавления нового элемента в коллекцию.
+ * Выполняет все необходимые шаги для ввода данных пользователя,
+ * валидации этих данных и создания нового объекта Ticket, который затем добавляется в коллекцию.
  */
-
 public class AddCommand implements Command {
     private final CollectionManager collectionManager;
     private Deque<String> historyDeque;
     private CommandProcessor commandProcessor;
 
+    /**
+     * Конструктор для создания команды добавления элемента.
+     *
+     * @param collectionManager Менеджер коллекции, в которую будет добавлен элемент
+     * @param history История команд
+     * @param commandProcessor Обработчик команд
+     */
     public AddCommand(CollectionManager collectionManager, Deque<String> history, CommandProcessor commandProcessor) {
         this.collectionManager = collectionManager;
         this.historyDeque = history;
@@ -28,8 +36,11 @@ public class AddCommand implements Command {
     }
 
     /**
-     * Метод, который выполняет команду
-     * @param args;
+     * Выполняет команду добавления нового билета в коллекцию.
+     * Запрашивает у пользователя данные для создания объекта Ticket, валидирует их
+     * и добавляет в коллекцию.
+     *
+     * @param args Аргументы команды (не используются в данном случае)
      */
     @Override
     public void execute(String[] args) {
@@ -86,6 +97,11 @@ public class AddCommand implements Command {
         System.out.println("Элемент добавлен");
     }
 
+    /**
+     * Описание команды.
+     *
+     * @return Описание команды, которая добавляет элемент в коллекцию
+     */
     @Override
-    public String description() { return "Adds element to collection"; };
+    public String description() { return "Adds element to collection"; }
 }

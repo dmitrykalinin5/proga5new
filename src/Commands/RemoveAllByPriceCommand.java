@@ -2,13 +2,29 @@ package Commands;
 
 import Collections.CollectionManager;
 
+/**
+ * Команда для удаления всех элементов из коллекции, у которых поле 'price' равно заданному значению.
+ * Этот класс реализует команду, которая удаляет все элементы из коллекции, у которых цена равна указанной.
+ */
 public class RemoveAllByPriceCommand implements Command {
     private CollectionManager collectionManager;
 
+    /**
+     * Конструктор для создания объекта RemoveAllByPriceCommand.
+     *
+     * @param collectionManager Объект, управляющий коллекцией
+     */
     public RemoveAllByPriceCommand(CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
     }
 
+    /**
+     * Выполняет команду удаления всех элементов из коллекции, у которых поле 'price' равно заданной цене.
+     * Если элементы с такой ценой найдены, они удаляются, иначе выводится сообщение о том, что таких элементов нет.
+     * В случае неверного формата цены, выводится сообщение об ошибке.
+     *
+     * @param args Аргументы команды, где args[1] — это цена, по которой нужно выполнить удаление.
+     */
     @Override
     public void execute(String[] args) {
         try {
@@ -24,6 +40,13 @@ public class RemoveAllByPriceCommand implements Command {
         }
     }
 
+    /**
+     * Описание команды.
+     *
+     * @return Описание команды, которая удаляет все элементы с заданной ценой из коллекции.
+     */
     @Override
-    public String description() { return "Removes all elements from the collection where the 'price' field is equal to the specified value"; }
+    public String description() {
+        return "Removes all elements from the collection where the 'price' field is equal to the specified value";
+    }
 }
