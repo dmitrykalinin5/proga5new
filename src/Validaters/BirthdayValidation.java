@@ -1,19 +1,21 @@
 package Validaters;
 
+import Commands.CommandProcessor;
 import Tools.Validation;
 import Collections.TicketType;
 import Console.Client;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class BirthdayValidation implements Validation {
     private String birthday;
-    private final Client client;
     private final String message;
+    private CommandProcessor commandProcessor;
 
-    public BirthdayValidation(Client client, String message) {
-        this.client = client;
+    public BirthdayValidation(String message, CommandProcessor commandProcessor) {
         this.message = message;
+        this.commandProcessor = commandProcessor;
         validation();
     }
 
@@ -23,15 +25,22 @@ public class BirthdayValidation implements Validation {
         while (true) {
             try {
                 System.out.print(message);
-                this.birthday = client.userInput();
-                String[] input = this.birthday.split("\\.");
-                if (input[0].length() != 2 || input[1].length() != 2 || input[2].length() != 4) {
+                String input;
+                if (commandProcessor.getScriptFlag()) {
+                    input = commandProcessor.getNextCommand().trim();
+                } else {
+                    Scanner scanner = new Scanner(System.in);
+                    input = scanner.nextLine().trim();
+                }
+                this.birthday = input;
+                String[] inputSplit = this.birthday.split("\\.");
+                if (inputSplit[0].length() != 2 || inputSplit[1].length() != 2 || inputSplit[2].length() != 4) {
                     System.out.println("Некорректный ввод");
                     continue;
                 }
-                int day = Integer.parseInt(input[0]);
-                int month = Integer.parseInt(input[1]);
-                int year = Integer.parseInt(input[2]);
+                int day = Integer.parseInt(inputSplit[0]);
+                int month = Integer.parseInt(inputSplit[1]);
+                int year = Integer.parseInt(inputSplit[2]);
                 if (((day >= 1 && day <= 31 && Arrays.stream(months31).anyMatch(n -> n == month))
                 || (day >= 1 && day <= 30 && Arrays.stream(months30).anyMatch(n -> n == month))
                 || (day >= 1 && day <= 29 && month == 2 && (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)))

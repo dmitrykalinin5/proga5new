@@ -2,20 +2,23 @@ package Validaters;
 
 import Collections.Coordinates;
 import Collections.Location;
+import Commands.CommandProcessor;
 import Console.Client;
 import Tools.Validation;
 
+import java.util.Scanner;
+
 public class LocationValidation implements Validation {
     private Location location;
-    private final Client client;
     private final String message;
     private long x;
     private double y;
     private Float z;
+    private CommandProcessor commandProcessor;
 
-    public LocationValidation(Client client, String message) {
-        this.client = client;
+    public LocationValidation(String message, CommandProcessor commandProcessor) {
         this.message = message;
+        this.commandProcessor = commandProcessor;
         validation();
     }
 
@@ -31,7 +34,15 @@ public class LocationValidation implements Validation {
         while (true) {
             try {
                 System.out.print(message);
-                String[] elements = client.userInput().split(" ");
+                String input;
+                if (commandProcessor.getScriptFlag()) {
+                    input = commandProcessor.getNextCommand().trim();
+                    System.out.println(input);
+                } else {
+                    Scanner scanner = new Scanner(System.in);
+                    input = scanner.nextLine().trim();
+                }
+                String[] elements = input.split(" ");
                 long x = Long.parseLong(elements[0]);
                 double y = Double.parseDouble(elements[1]);
                 Float z = Float.parseFloat(elements[2]);

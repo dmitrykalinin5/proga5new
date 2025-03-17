@@ -19,10 +19,12 @@ import java.util.*;
 public class AddCommand implements Command {
     private final CollectionManager collectionManager;
     private Deque<String> historyDeque;
+    private CommandProcessor commandProcessor;
 
-    public AddCommand(CollectionManager collectionManager, Deque<String> history) {
+    public AddCommand(CollectionManager collectionManager, Deque<String> history, CommandProcessor commandProcessor) {
         this.collectionManager = collectionManager;
         this.historyDeque = history;
+        this.commandProcessor = commandProcessor;
     }
 
     /**
@@ -31,53 +33,49 @@ public class AddCommand implements Command {
      */
     @Override
     public void execute(String[] args) {
-        Client client = new Client(collectionManager, historyDeque); // добавить аргументы
-
         int newId = collectionManager.getNextId();
 
         String message = "Введите ваше имя: ";
-        NameValidation nameValidation = new NameValidation(client, message);
+        NameValidation nameValidation = new NameValidation(message, commandProcessor);
         String name = nameValidation.getName();
 
         System.out.println("Ввод координат:");
         message = "Введите координату x: ";
-        XCoordinateValidation xCoordinateValidation = new XCoordinateValidation(client, message);
+        XCoordinateValidation xCoordinateValidation = new XCoordinateValidation(message, commandProcessor);
         int x = xCoordinateValidation.getX();
         message = "Введите координату y: ";
-        YCoordinateValidation yCoordinateValidation = new YCoordinateValidation(client, message);
+        YCoordinateValidation yCoordinateValidation = new YCoordinateValidation(message,commandProcessor);
         double y = yCoordinateValidation.getY();
         Coordinates coordinates = new Coordinates(x, y); // коорды
 
         LocalDateTime date = LocalDateTime.now(); // дата
 
         message = "Введите цену: ";
-        PriceValidation priceValidation = new PriceValidation(client, message);
+        PriceValidation priceValidation = new PriceValidation(message, commandProcessor);
         Long price = priceValidation.getPrice();
 
         message = "Введите тип вашего билета(VIP, USUAL, CHEAP): ";
-        TicketTypeValidation ticketTypeValidation = new TicketTypeValidation(client, message);
+        TicketTypeValidation ticketTypeValidation = new TicketTypeValidation(message, commandProcessor);
         TicketType ticketType = ticketTypeValidation.getTicketType();
 
         message = "Введите дату рождения в формате DD.MM.YYYY: ";
-        BirthdayValidation birthdayValidation = new BirthdayValidation(client, message);
+        BirthdayValidation birthdayValidation = new BirthdayValidation(message, commandProcessor);
         String birthdayInput = birthdayValidation.getBirthday();
         // парсинг даты из формата DD.MM.YYYY в ZonedDateTime
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         LocalDate localdate = LocalDate.parse(birthdayInput, formatter);
         ZonedDateTime birthday = localdate.atStartOfDay(ZoneId.systemDefault());
 
-
         message = "Введите ваш рост: ";
-        HeightValidation heightValidation = new HeightValidation(client, message);
+        HeightValidation heightValidation = new HeightValidation(message, commandProcessor);
         Long height = heightValidation.getHeight();
 
         message = "Введите ваш вес: ";
-        WeightValidation weightValidation = new WeightValidation(client, message);
+        WeightValidation weightValidation = new WeightValidation(message, commandProcessor);
         int weight = weightValidation.getweight();
 
-
         message = "Введите координаты вашей локации через пробел (x y z): ";
-        LocationValidation locationValidation = new LocationValidation(client, message);
+        LocationValidation locationValidation = new LocationValidation(message, commandProcessor);
         Location location = locationValidation.getLocation();
 
         Person person = new Person(birthday, height, weight, location);

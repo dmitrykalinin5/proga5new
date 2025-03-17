@@ -1,16 +1,19 @@
 package Validaters;
 
+import Commands.CommandProcessor;
 import Tools.Validation;
 import Console.Client;
 
+import java.util.Scanner;
+
 public class PriceValidation implements Validation {
     private Long price;
-    private final Client client;
     private final String message;
+    private CommandProcessor commandProcessor;
 
-    public PriceValidation(Client client, String message) {
-        this.client = client;
+    public PriceValidation(String message, CommandProcessor commandProcessor) {
         this.message = message;
+        this.commandProcessor = commandProcessor;
         validation();
     }
 
@@ -18,7 +21,15 @@ public class PriceValidation implements Validation {
         while (true) {
             try {
                 System.out.print(message);
-                this.price = Long.parseLong(client.userInput());
+                String input;
+                if (commandProcessor.getScriptFlag()) {
+                    input = commandProcessor.getNextCommand().trim();
+                    System.out.println(input);
+                } else {
+                    Scanner scanner = new Scanner(System.in);
+                    input = scanner.nextLine().trim();
+                }
+                this.price = Long.parseLong(input);
                 if (!validate()) {
                     System.out.println("Цена должна быть больше 0");
                     continue;

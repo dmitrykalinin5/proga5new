@@ -1,16 +1,19 @@
 package Validaters;
 
+import Commands.CommandProcessor;
 import Tools.Validation;
 import Console.Client;
 
+import java.util.Scanner;
+
 public class XCoordinateValidation implements Validation {
     private int x;
-    private Client client;
     private String message;
+    private CommandProcessor commandProcessor;
 
-    public XCoordinateValidation(Client client, String message) {
-        this.client = client;
+    public XCoordinateValidation(String message, CommandProcessor commandProcessor) {
         this.message = message;
+        this.commandProcessor = commandProcessor;
         validation();
     }
 
@@ -18,10 +21,18 @@ public class XCoordinateValidation implements Validation {
         while (true) {
             try {
                 System.out.print(message);
-                this.x = Integer.parseInt(client.userInput());
+                String input;
+                if (commandProcessor.getScriptFlag()) {
+                    input = commandProcessor.getNextCommand().trim();
+                    System.out.println(input);
+                } else {
+                    Scanner scanner = new Scanner(System.in);
+                    input = scanner.nextLine().trim();
+                }
+                this.x = Integer.parseInt(input);
                 return this.x;
             } catch (NumberFormatException e) {
-                System.out.println("Некорректный ввод");
+                System.out.println("Некорректный ввод" + e.toString());
             }
         }
     }

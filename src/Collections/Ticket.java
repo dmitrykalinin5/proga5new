@@ -62,27 +62,6 @@ public class Ticket implements Comparable<Ticket> {
         return Integer.compare(this.id, other.id);
     };
 
-//    // Проверка на валидность
-//    @Override
-//    public boolean validate() {
-//        return id.validate() &&
-//                name.validate() &&
-//                coordinatesValidation.validate() &&
-//                creationDateValidation.validate() &&
-//                price.validate();
-//
-//    }
-//    // Меняем сообщение
-//    @Override
-//    public String getErrorMessage() {
-//        if (!id.validate()) {return id.getErrorMessage();}
-//        if (!name.validate()) {return name.getErrorMessage();}
-//        if (!coordinatesValidation.validate()) {return coordinatesValidation.getErrorMessage();}
-//        if (!creationDateValidation.validate()) {return creationDateValidation.getErrorMessage();}
-//        if (!price.validate()) {return price.getErrorMessage();}
-//        return "Все окей (geterrormsg)";
-//    }
-
     @Override
     public String toString() {
         // Написал названия для полей, но думаю потом поменяю
@@ -92,8 +71,4 @@ public class Ticket implements Comparable<Ticket> {
                 ", \"Тип билета\" : " + type + ", \"Дата рождения:\" : " + person.getBirthday() +
                 ", \"Рост\" : " + person.getHeight() + ", \"Вес\" : " + person.getWeight() + ", \"Локация\" : " + person.getLocation() + "}";
     }
-
-//    public boolean validate() {
-//        if (id <= )
-//    }
 }

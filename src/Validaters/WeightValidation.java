@@ -1,24 +1,26 @@
 package Validaters;
 
+import Commands.CommandProcessor;
 import Tools.Validation;
 import Console.Client;
+
+import java.util.Scanner;
 
 /**
  * Класс для валидации роста
  */
 public class WeightValidation implements Validation {
     private int weight;
-    private final Client client;
     private final String message;
+    private CommandProcessor commandProcessor;
 
     /**
      * Конструктор класса
-     * @param client
      * @param message
      */
-    public WeightValidation(Client client, String message) {
-        this.client = client;
+    public WeightValidation(String message, CommandProcessor commandProcessor) {
         this.message = message;
+        this.commandProcessor = commandProcessor;
         validation();
     }
 
@@ -30,14 +32,22 @@ public class WeightValidation implements Validation {
         while (true) {
             try {
                 System.out.print(message);
-                this.weight = Integer.parseInt(client.userInput());
+                String input;
+                if (commandProcessor.getScriptFlag()) {
+                    input = commandProcessor.getNextCommand().trim();
+                    System.out.println(input);
+                } else {
+                    Scanner scanner = new Scanner(System.in);
+                    input = scanner.nextLine().trim();
+                }
+                this.weight = Integer.parseInt(input);
                 if (!validate()) {
-                    System.out.println("Рост должен быть больше 0");
+                    System.out.println("Вес должен быть больше 0");
                     continue;
                 }
                 return this.weight;
             } catch (NumberFormatException | NullPointerException e) {
-                System.out.println("Некорректный ввод");
+                System.out.println("Некорректный ввод" + e.getMessage());
             }
         }
     }
