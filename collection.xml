@@ -36,4 +36,16 @@
         <weight>65</weight>
         <location>1,1.0,1.0</location>
     </ticket>
+    <ticket>
+        <id>4</id>
+        <name>123</name>
+        <coordinates>123, 123.0</coordinates>
+        <date>2025-03-18T14:53:49.332636700</date>
+        <price>123</price>
+        <type>VIP</type>
+        <birthday>2000-12-12T00:00+03:00[Europe/Moscow]</birthday>
+        <height>123</height>
+        <weight>123</weight>
+        <location>1,1.0,1.0</location>
+    </ticket>
 </Tickets>

@@ -199,10 +199,20 @@ public class Ticket implements Comparable<Ticket> {
      */
     @Override
     public String toString() {
-        return  "Ticket{\"id\" : " + id + ", \"name\" : \"" + name + "\", \"coordinates\" : " +
-                coordinates.toString() + ", \"Дата покупки\" : "
-                + creationDate + ", \"Цена\" : " + price +
-                ", \"Тип билета\" : " + type + ", \"Дата рождения:\" : " + person.getBirthday() +
-                ", \"Рост\" : " + person.getHeight() + ", \"Вес\" : " + person.getWeight() + ", \"Локация\" : " + person.getLocation() + "}";
+        return "Ticket id: " + id + "\n" +
+                "name: " + name + "\n" +
+                "coordinates: " + coordinates.toString() + "\n" +
+                "Дата покупки: " + creationDate + "\n" +
+                "Цена: " + price + "\n" +
+                "Тип билета: " + type + "\n" +
+                "Дата рождения: " + person.getBirthday() + "\n" +
+                "Рост: " + person.getHeight() + "\n" +
+                "Вес: " + person.getWeight() + "\n" +
+                "Локация: " + person.getLocation() + "\n";
+//        return  "Ticket{\"id\" : " + id + ", \"name\" : \"" + name + "\", \"coordinates\" : " +
+//                coordinates.toString() + ", \"Дата покупки\" : "
+//                + creationDate + ", \"Цена\" : " + price +
+//                ", \"Тип билета\" : " + type + ", \"Дата рождения:\" : " + person.getBirthday() +
+//                ", \"Рост\" : " + person.getHeight() + ", \"Вес\" : " + person.getWeight() + ", \"Локация\" : " + person.getLocation() + "}";
     }
 }
