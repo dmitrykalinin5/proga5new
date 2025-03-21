@@ -61,21 +61,6 @@ public class CollectionManager {
     }
 
     /**
-     * Метод, который удаляет элемент с заданным ID из коллекции
-     * @param id ID элемента, который нужно удалить
-     * @return true, если элемент удален; false, если элемент с данным айди не найден.
-     */
-//    public boolean removeById(int id) {
-//        for (Ticket ticket : this.queue) {
-//            if (ticket.getId() == id) {
-//                this.queue.remove(ticket);
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
-    /**
      * Метод, который возвращает кол-во элементов коллекции
      * @return queue.size()
      */

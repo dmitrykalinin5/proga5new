@@ -4,6 +4,7 @@ import Collections.CollectionManager;
 import Collections.Ticket;
 
 import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 import java.util.PriorityQueue;
 
 /**
@@ -34,11 +35,13 @@ public class RemoveByIdCommand implements Command {
     public void execute(String[] args) {
         this.queue = collectionManager.getQueue();
         boolean isRemoved = false;
+        Iterator<Ticket> iterator = queue.iterator();
+        int id = Integer.parseInt(args[1]);
         try {
-            int id = Integer.parseInt(args[1]);
-            for (Ticket ticket : queue) {
+            while (iterator.hasNext()) {
+                Ticket ticket = iterator.next();
                 if (ticket.getId() == id) {
-                    queue.remove(ticket);
+                    iterator.remove();
                     isRemoved = true;
                 }
             }
@@ -51,8 +54,7 @@ public class RemoveByIdCommand implements Command {
             System.out.println("id должно быть числом");
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Некорректный ввод");
-            // узнать про concurrentModification
-        } catch (ConcurrentModificationException e ) {}
+        }
     }
 
     /**
