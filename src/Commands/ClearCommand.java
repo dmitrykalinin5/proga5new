@@ -26,7 +26,7 @@ public class ClearCommand implements Command {
      */
     @Override
     public void execute(String[] args) {
-        collectionManager.clearAllElements();
+        collectionManager.getQueue().clear();
         System.out.println("Коллекция очищена");
     }
 

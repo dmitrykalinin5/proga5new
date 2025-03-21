@@ -1,6 +1,10 @@
 package Commands;
 
 import Collections.CollectionManager;
+import Collections.Ticket;
+
+import java.util.ConcurrentModificationException;
+import java.util.PriorityQueue;
 
 /**
  * Команда для удаления элемента из коллекции по его идентификатору.
@@ -8,6 +12,7 @@ import Collections.CollectionManager;
  */
 public class RemoveByIdCommand implements Command {
     private CollectionManager collectionManager;
+    private PriorityQueue<Ticket> queue;
 
     /**
      * Конструктор для создания объекта RemoveByIdCommand.
@@ -27,16 +32,27 @@ public class RemoveByIdCommand implements Command {
      */
     @Override
     public void execute(String[] args) {
+        this.queue = collectionManager.getQueue();
+        boolean isRemoved = false;
         try {
             int id = Integer.parseInt(args[1]);
-            if (collectionManager.removeById(id)) {
+            for (Ticket ticket : queue) {
+                if (ticket.getId() == id) {
+                    queue.remove(ticket);
+                    isRemoved = true;
+                }
+            }
+            if (isRemoved) {
                 System.out.println("Removed " + id + " from the collection");
             } else {
                 System.out.println("Could not remove " + id + " from the collection");
             }
         } catch (NumberFormatException e) {
             System.out.println("id должно быть числом");
-        }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Некорректный ввод");
+            // узнать про concurrentModification
+        } catch (ConcurrentModificationException e ) {}
     }
 
     /**

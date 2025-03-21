@@ -34,14 +34,6 @@ public class CollectionManager {
     }
 
     /**
-     * Метод, который добавляет ticket в коллекцию
-     * @param ticket;
-     */
-    public void add(Ticket ticket) {
-        this.queue.add(ticket);
-    }
-
-    /**
      * Метод, который возвращает следующий id
      * @return nextId
      */
@@ -61,34 +53,11 @@ public class CollectionManager {
     }
 
     /**
-     * Метод, который возвращает все элементы
-     * @return queue
+     * Метод, который возвращает дату создания коллекции
+     * @return creationTime
      */
-    public String getAllElements() {
-        if (this.queue.isEmpty()) {
-            return "Коллекция пуста\n";
-        } else {
-            StringBuilder result = new StringBuilder();
-            this.queue.stream()
-                    .sorted(Comparator.comparing(Ticket::getId))
-                    .forEach(ticket -> result.append(ticket.toString()).append("\n"));
-            return result.toString();
-        }
-    }
-
-    /**
-     * Метод, который очищает всю коллекцию
-     */
-    public void clearAllElements() { queue.clear(); }
-
-    /**
-     * Метод, который возвращает информацию о коллекции
-     * @return info
-     */
-    public String collectionInfo() {
-        String info = "Информация о коллекции:\nДата создания: " + creationTime.toString()
-                + "\nКол-во элементов: " + collectionSize();
-        return info;
+    public LocalDateTime getCreationTime() {
+        return creationTime;
     }
 
     /**
@@ -96,15 +65,15 @@ public class CollectionManager {
      * @param id ID элемента, который нужно удалить
      * @return true, если элемент удален; false, если элемент с данным айди не найден.
      */
-    public boolean removeById(int id) {
-        for (Ticket ticket : this.queue) {
-            if (ticket.getId() == id) {
-                this.queue.remove(ticket);
-                return true;
-            }
-        }
-        return false;
-    }
+//    public boolean removeById(int id) {
+//        for (Ticket ticket : this.queue) {
+//            if (ticket.getId() == id) {
+//                this.queue.remove(ticket);
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
     /**
      * Метод, который возвращает кол-во элементов коллекции
@@ -112,59 +81,6 @@ public class CollectionManager {
      */
     public int collectionSize() {
         return queue.size();
-    }
-
-    /**
-     * Метод, который возвращает объект класса по минимальному id
-     * @return queue.peek(), объект по минимальному айди
-     */
-    public Ticket getByMinimumId() {
-        return queue.peek();
-    }
-
-    /**
-     * Метод, который удаляет все элементы эквивалентные заданной цене
-     * @param price
-     * @return true, если элемент удален; false, если элемент не удален
-     */
-    public boolean removeAllByPrice(int price) {
-        boolean flag = false;
-        Iterator<Ticket> iterator = this.queue.iterator();
-        while (iterator.hasNext()) {
-            Ticket ticket = iterator.next();
-            if (ticket.getPrice() == price) {
-                iterator.remove();
-                flag = true;
-            }
-        }
-        return flag;
-    }
-
-    /**
-     * Метод, который удаляет первый объект
-     * @return true, если удален; false, если не получилось удалить
-     */
-    public boolean removeFirst() {
-        if (this.queue.isEmpty()) {
-            return false;
-        } else {
-            this.queue.remove(this.queue.peek());
-            return true;
-        }
-    }
-
-    /**
-     * Выводит первый элемент коллекции и удаляет его
-     * @return
-     */
-    public boolean removeHead() {
-        if (this.queue.isEmpty()) {
-            return false;
-        } else {
-            System.out.println(this.queue.peek());
-            this.queue.remove(this.queue.peek());
-            return true;
-        }
     }
 
     /**

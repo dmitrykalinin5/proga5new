@@ -1,6 +1,9 @@
 package Commands;
 
 import Collections.CollectionManager;
+import Collections.Ticket;
+
+import java.util.PriorityQueue;
 
 /**
  * Команда для удаления первого элемента из коллекции.
@@ -27,8 +30,13 @@ public class RemoveFirstCommand implements Command {
      */
     @Override
     public void execute(String[] args) {
-        boolean result = collectionManager.removeFirst();
-        if (result) {
+        PriorityQueue<Ticket> queue = collectionManager.getQueue();
+        boolean flag = false;
+        if (!queue.isEmpty()) {
+            queue.remove(queue.peek());
+            flag = true;
+        }
+        if (flag) {
             System.out.println("Элемент успешно удален");
         } else {
             System.out.println("Нечего удалять! Коллекция пуста");

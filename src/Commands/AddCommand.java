@@ -19,19 +19,16 @@ import java.util.*;
  */
 public class AddCommand implements Command {
     private final CollectionManager collectionManager;
-    private Deque<String> historyDeque;
-    private CommandProcessor commandProcessor;
+    private final CommandProcessor commandProcessor;
 
     /**
      * Конструктор для создания команды добавления элемента.
      *
      * @param collectionManager Менеджер коллекции, в которую будет добавлен элемент
-     * @param history История команд
      * @param commandProcessor Обработчик команд
      */
-    public AddCommand(CollectionManager collectionManager, Deque<String> history, CommandProcessor commandProcessor) {
+    public AddCommand(CollectionManager collectionManager, CommandProcessor commandProcessor) {
         this.collectionManager = collectionManager;
-        this.historyDeque = history;
         this.commandProcessor = commandProcessor;
     }
 
@@ -93,7 +90,7 @@ public class AddCommand implements Command {
         Ticket ticket = new Ticket(newId, name, coordinates, date,
                 price, ticketType, person);
 
-        this.collectionManager.add(ticket);
+        this.collectionManager.getQueue().add(ticket);
         System.out.println("Элемент добавлен");
     }
 

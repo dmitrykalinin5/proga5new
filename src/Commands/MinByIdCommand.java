@@ -26,8 +26,13 @@ public class MinByIdCommand implements Command {
      */
     @Override
     public void execute(String[] args) {
-        String element = collectionManager.getByMinimumId().toString();
-        System.out.println("Элемент с минимальным айди:\n" + element);
+        System.out.println();
+        try {
+            String element = collectionManager.getQueue().peek().toString();
+            System.out.println("Элемент с минимальным айди:\n" + element);
+        } catch (NullPointerException e) {
+            System.out.println("Элемент не обнаружен");
+        }
     }
 
     /**

@@ -45,7 +45,7 @@ public class CommandProcessor {
         commands.put("exit", new ExitCommand());
 
         // Команды с аргументами
-        commands.put("add", new AddCommand(collectionManager, historyDeque, this));
+        commands.put("add", new AddCommand(collectionManager, this));
         commands.put("update", new UpdateIdCommand(collectionManager, historyDeque, this));
         commands.put("remove_by_id", new RemoveByIdCommand(collectionManager));
         commands.put("execute_script", new ExecuteScriptCommand(this));

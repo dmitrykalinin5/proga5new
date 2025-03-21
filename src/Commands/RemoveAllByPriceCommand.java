@@ -1,6 +1,10 @@
 package Commands;
 
 import Collections.CollectionManager;
+import Collections.Ticket;
+
+import java.util.Iterator;
+import java.util.PriorityQueue;
 
 /**
  * Команда для удаления всех элементов из коллекции, у которых поле 'price' равно заданному значению.
@@ -29,8 +33,17 @@ public class RemoveAllByPriceCommand implements Command {
     public void execute(String[] args) {
         try {
             int price = Integer.parseInt(args[1]);
-            boolean result = collectionManager.removeAllByPrice(price);
-            if (result) {
+            PriorityQueue<Ticket> queue = collectionManager.getQueue();
+            boolean flag = false;
+            Iterator<Ticket> iterator = queue.iterator();
+            while (iterator.hasNext()) {
+                Ticket ticket = iterator.next();
+                if (ticket.getPrice() == price) {
+                    iterator.remove();
+                    flag = true;
+                }
+            }
+            if (flag) {
                 System.out.println("Элементы успешно удалены");
             } else {
                 System.out.println("Элементов с такой ценой нет");

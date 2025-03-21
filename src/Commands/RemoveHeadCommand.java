@@ -1,13 +1,16 @@
 package Commands;
 
 import Collections.CollectionManager;
+import Collections.Ticket;
+
+import java.util.PriorityQueue;
 
 /**
  * Команда для вывода и удаления первого элемента из коллекции.
  * Этот класс реализует команду, которая выводит первый элемент коллекции и удаляет его.
  */
 public class RemoveHeadCommand implements Command {
-    private CollectionManager collectionManager;
+    private final CollectionManager collectionManager;
 
     /**
      * Конструктор для создания объекта RemoveHeadCommand.
@@ -27,8 +30,14 @@ public class RemoveHeadCommand implements Command {
      */
     @Override
     public void execute(String[] args) {
-        boolean result = collectionManager.removeHead();
-        if (result) {
+        PriorityQueue<Ticket> queue = collectionManager.getQueue();
+        boolean flag = false;
+        if (!queue.isEmpty()) {
+            System.out.println(queue.peek());
+            queue.remove(queue.peek());
+            flag = true;
+        }
+        if (flag) {
             System.out.println("Элемент успешно выведен и удален");
         } else {
             System.out.println("Нечего выводить! Коллекция пуста");

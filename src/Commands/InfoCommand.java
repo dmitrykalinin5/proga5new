@@ -1,6 +1,9 @@
 package Commands;
 
 import Collections.CollectionManager;
+import Collections.Ticket;
+
+import java.util.PriorityQueue;
 
 /**
  * Команда для вывода информации о коллекции.
@@ -20,13 +23,15 @@ public class InfoCommand implements Command {
 
     /**
      * Выполняет команду вывода информации о коллекции.
-     * Этот метод вызывает метод collectionInfo() из CollectionManager и выводит информацию на экран.
+     * Этот метод вызывает методы getCreationTime() и collectionSize() из CollectionManager и выводит информацию на экран.
      *
      * @param args Аргументы команды (не используются в данном случае)
      */
     @Override
     public void execute(String[] args) {
-        System.out.println(collectionManager.collectionInfo());
+        String info = "Информация о коллекции:\nДата создания: " + collectionManager.getCreationTime().toString()
+                + "\nКол-во элементов: " + collectionManager.collectionSize();
+        System.out.println(info);
     }
 
     /**
